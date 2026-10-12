@@ -1,0 +1,407 @@
+export interface MenuItem {
+  id: string;
+  name: string;
+  category: 'tortilla' | 'talerz' | 'box' | 'pita' | 'bulka' | 'burger' | 'wegetarianskie' | 'dodatki';
+  price: number;
+  description?: string;
+  ingredients: string;
+  sizes?: string[];
+  isSignature?: boolean;
+  isBestseller?: boolean;
+  isVegetarian?: boolean;
+}
+
+export const RESTAURANT_INFO = {
+  name: 'BM KING KEBAB',
+  address: 'ul. Sacharowa 45A, 92-517 Łódź',
+  addressShort: 'ul. Sacharowa 45A, Łódź',
+  phone: '729 688 214',
+  phoneFormatted: '+48 729 688 214',
+  phoneRaw: '+48729688214',
+  rating: 4.9,
+  reviewsCount: 928,
+  googleMapsUrl: 'https://maps.google.com/?q=Andrzeja+Sacharowa+45A,+92-517+Łódź',
+  schedule: [
+    { day: 'Niedziela', open: '09:00', close: '01:00', dayIndex: 0 },
+    { day: 'Poniedziałek', open: '09:00', close: '01:00', dayIndex: 1 },
+    { day: 'Wtorek', open: '09:00', close: '01:00', dayIndex: 2 },
+    { day: 'Środa', open: '09:00', close: '01:00', dayIndex: 3 },
+    { day: 'Czwartek', open: '09:00', close: '01:00', dayIndex: 4 },
+    { day: 'Piątek', open: '09:00', close: '02:00', dayIndex: 5 },
+    { day: 'Sobota', open: '09:00', close: '02:00', dayIndex: 6 },
+  ],
+  awards: 'Złoty Laureat Orły Gastronomii 2025 & 2026',
+};
+
+export const MENU_CATEGORIES = [
+  { id: 'all', label: 'Wszystkie pozycje' },
+  { id: 'tortilla', label: 'Strefa Kebab Tortilla' },
+  { id: 'box', label: 'Strefa Kebab Box' },
+  { id: 'pita', label: 'Strefa Kebab Pita & Bułka' },
+  { id: 'talerz', label: 'Strefa Talerz' },
+  { id: 'burger', label: 'Strefa Burgery' },
+  { id: 'wegetarianskie', label: 'Strefa Wegetariańska' },
+  { id: 'dodatki', label: 'Nuggets, Dodatki & Napoje' },
+] as const;
+
+export const MENU_ITEMS: MenuItem[] = [
+  // Strefa Kebab Tortilla
+  {
+    id: 'tor-rollo',
+    name: 'Tortilla Rollo',
+    category: 'tortilla',
+    price: 16.0,
+    ingredients: 'Mięso, surówki, sos',
+    sizes: ['Mały (16 zł)', 'Średni', 'Duży'],
+    isBestseller: true,
+  },
+  {
+    id: 'tor-ser',
+    name: 'Tortilla Z Serem',
+    category: 'tortilla',
+    price: 19.0,
+    ingredients: 'Mięso, surówki, ser, sos',
+    sizes: ['Mały (19 zł)', 'Średni', 'Duży'],
+  },
+  {
+    id: 'tor-samo-mieso',
+    name: 'Tortilla Samo Mięso',
+    category: 'tortilla',
+    price: 20.0,
+    ingredients: 'Mięso x2, sos',
+    sizes: ['Mały (20 zł)', 'Średni', 'Duży'],
+  },
+  {
+    id: 'tor-amerykanski',
+    name: 'Tortilla Amerykański',
+    category: 'tortilla',
+    price: 19.0,
+    ingredients: 'Mięso, frytki, surówki, sos',
+    sizes: ['Mały (19 zł)', 'Średni', 'Duży'],
+  },
+  {
+    id: 'tor-mieso-frytki',
+    name: 'Tortilla Samo Mięso Z Frytkami',
+    category: 'tortilla',
+    price: 20.0,
+    ingredients: 'Mięso, frytki, sos',
+    sizes: ['Mały (20 zł)', 'Średni', 'Duży'],
+  },
+  {
+    id: 'tor-special-bm',
+    name: 'Special Tortilla BM King Kebab',
+    category: 'tortilla',
+    price: 28.0,
+    ingredients: 'Mięso x2, surówki, ser, oliwki, feta, sos',
+    isSignature: true,
+  },
+  {
+    id: 'tor-mega-super',
+    name: 'Mega Super Tortilla Duży Kebab',
+    category: 'tortilla',
+    price: 32.0,
+    ingredients: 'Mięso x3, surówki, ser, oliwki, feta, frytki, sos',
+    isSignature: true,
+  },
+
+  // Strefa Kebab Box
+  {
+    id: 'box-standard',
+    name: 'Kebab Box',
+    category: 'box',
+    price: 18.0,
+    ingredients: 'Mięso, sos, surówki, frytki',
+    sizes: ['Średni (18 zł)', 'Duży'],
+    isBestseller: true,
+  },
+  {
+    id: 'box-mieso-frytki',
+    name: 'Mięso Z Frytkami Box',
+    category: 'box',
+    price: 20.0,
+    ingredients: 'Mięso, frytki, sos',
+    sizes: ['Średni (20 zł)', 'Duży'],
+  },
+  {
+    id: 'box-z-serem',
+    name: 'Kebab Box Z Serem',
+    category: 'box',
+    price: 24.0,
+    ingredients: 'Mięso, frytki, ser, sos',
+    sizes: ['Średni (24 zł)', 'Duży'],
+  },
+  {
+    id: 'box-kapsalon',
+    name: 'Kapsalon',
+    category: 'box',
+    price: 26.0,
+    ingredients: 'Mięso, frytki, ser, sałata, sos',
+    isSignature: true,
+  },
+  {
+    id: 'box-salatka',
+    name: 'Sałatka Kebab',
+    category: 'box',
+    price: 20.0,
+    ingredients: 'Mięso, sałata lodowa, ogórki, pomidory, sos',
+  },
+
+  // Strefa Kebab Pita & Bułka
+  {
+    id: 'pita-rollo',
+    name: 'Pita Rollo',
+    category: 'pita',
+    price: 14.0,
+    ingredients: 'Mięso, surówki, sos',
+    sizes: ['Mały (14 zł)', 'Średni', 'Duży'],
+    isBestseller: true,
+  },
+  {
+    id: 'pita-z-serem',
+    name: 'Pita Z Serem',
+    category: 'pita',
+    price: 16.0,
+    ingredients: 'Mięso, surówki, ser, sos',
+    sizes: ['Mały (16 zł)', 'Średni', 'Duży'],
+  },
+  {
+    id: 'pita-amerykanski',
+    name: 'Pita Amerykański',
+    category: 'pita',
+    price: 16.0,
+    ingredients: 'Mięso, frytki, surówki, sos',
+    sizes: ['Mały (16 zł)', 'Średni', 'Duży'],
+  },
+  {
+    id: 'pita-samo-mieso',
+    name: 'Pita Samo Mięso',
+    category: 'pita',
+    price: 18.0,
+    ingredients: 'Mięso, sos',
+    sizes: ['Mały (18 zł)', 'Średni', 'Duży'],
+  },
+  {
+    id: 'pita-samo-mieso-frytki',
+    name: 'Pita Samo Mięso Z Frytkami',
+    category: 'pita',
+    price: 17.0,
+    ingredients: 'Mięso x2, frytki, sos',
+    sizes: ['Mały (17 zł)', 'Średni', 'Duży'],
+  },
+  {
+    id: 'pita-special-bm',
+    name: 'Special Pita BM King Kebab',
+    category: 'pita',
+    price: 32.0,
+    ingredients: 'Mięso x2, surówki, ser, oliwki, feta, frytki, sos',
+    isSignature: true,
+  },
+  {
+    id: 'bulka-normalna',
+    name: 'Bułka Normalna',
+    category: 'pita',
+    price: 22.0,
+    ingredients: 'Mięso, ser, surówki, sos',
+  },
+  {
+    id: 'bulka-amerykanska',
+    name: 'Bułka Amerykańska',
+    category: 'pita',
+    price: 24.0,
+    ingredients: 'Mięso, frytki, ser, sos',
+  },
+
+  // Strefa Talerz
+  {
+    id: 'talerz-kebab',
+    name: 'Talerz Kebab',
+    category: 'talerz',
+    price: 24.0,
+    ingredients: 'Frytki, mięso, warzywa, sos',
+    isBestseller: true,
+  },
+  {
+    id: 'talerz-super',
+    name: 'Super Talerz Kebab',
+    category: 'talerz',
+    price: 28.0,
+    ingredients: 'Frytki, mięso, ser, warzywa, sos',
+  },
+  {
+    id: 'talerz-mega',
+    name: 'Mega Talerz Kebab',
+    category: 'talerz',
+    price: 32.0,
+    ingredients: 'Frytki, mięso, warzywa, sos',
+  },
+  {
+    id: 'talerz-falafel',
+    name: 'Talerz Falafel',
+    category: 'talerz',
+    price: 19.0,
+    ingredients: 'Frytki, sałata, surówki, feta, oliwki, pomidory, ogórek, sos',
+    isVegetarian: true,
+  },
+  {
+    id: 'talerz-special-king',
+    name: 'Special King Talerz Kebab',
+    category: 'talerz',
+    price: 30.0,
+    ingredients: 'Frytki, grillowane mięso, feta, warzywa, sos',
+    isSignature: true,
+  },
+
+  // Strefa Burgery
+  {
+    id: 'burger-cheeseburger-bw',
+    name: 'Cheeseburger Baranina / Wołowina',
+    category: 'burger',
+    price: 17.0,
+    ingredients: 'Mięso z grilla, ser, sałata, pomidory, cebula, ogórek, sos',
+  },
+  {
+    id: 'burger-chicken',
+    name: 'Cheeseburger Z Kurczaka',
+    category: 'burger',
+    price: 16.0,
+    ingredients: 'Mięso z grilla, ser, sałata, pomidory, cebula, ogórek, sos',
+  },
+  {
+    id: 'burger-double',
+    name: 'Double Cheeseburger',
+    category: 'burger',
+    price: 22.0,
+    ingredients: 'Mięso z grilla, ser, sałata, pomidory, cebula, ogórek, sos',
+  },
+  {
+    id: 'burger-special-king',
+    name: 'Special King Burger Zestaw',
+    category: 'burger',
+    price: 32.0,
+    ingredients: 'Mięso z grilla, ser, sałata, pomidory, cebula, ogórek, frytki, cola, sos',
+    isSignature: true,
+  },
+
+  // Strefa Wegetariańska
+  {
+    id: 'veg-salatka-grecka',
+    name: 'Sałatka Grecka',
+    category: 'wegetarianskie',
+    price: 15.0,
+    ingredients: 'Sałata, sos, pomidory, ogórek, feta, oliwki',
+    isVegetarian: true,
+  },
+  {
+    id: 'veg-falafel-tortilla',
+    name: 'Tortilla Falafel',
+    category: 'wegetarianskie',
+    price: 13.0,
+    ingredients: 'Falafel, surówki, sos',
+    sizes: ['Mały (13 zł)', 'Średni', 'Duży'],
+    isVegetarian: true,
+  },
+  {
+    id: 'veg-falafel-amerykanski',
+    name: 'Tortilla Falafel Amerykański',
+    category: 'wegetarianskie',
+    price: 15.0,
+    ingredients: 'Falafel, surówki, sos, frytki',
+    sizes: ['Mały (15 zł)', 'Średni', 'Duży'],
+    isVegetarian: true,
+  },
+  {
+    id: 'veg-pita-falafel',
+    name: 'Pita Falafel',
+    category: 'wegetarianskie',
+    price: 13.0,
+    ingredients: 'Falafel, surówki, sos, frytki',
+    sizes: ['Mały (13 zł)', 'Średni', 'Duży'],
+    isVegetarian: true,
+  },
+
+  // Strefa Nuggets Box & Dodatki & Napoje
+  {
+    id: 'extra-nuggets',
+    name: 'Nuggets Z Kurczaka',
+    category: 'dodatki',
+    price: 16.0,
+    ingredients: 'Nuggets, frytki, sos',
+  },
+  {
+    id: 'extra-mix-nuggets',
+    name: 'Mix Nuggets Z Kurczaka',
+    category: 'dodatki',
+    price: 25.0,
+    ingredients: 'Mix nuggets, frytki, coca-cola, sos',
+  },
+  {
+    id: 'extra-hot-wings',
+    name: 'Chicken Hot Wings (6 szt.)',
+    category: 'dodatki',
+    price: 20.0,
+    ingredients: '6szt, skrzydełka, frytki',
+  },
+  {
+    id: 'extra-frytki',
+    name: 'Frytki',
+    category: 'dodatki',
+    price: 8.0,
+    ingredients: 'Małe (8,00 zł) / Duże',
+  },
+  {
+    id: 'extra-frytki-ser',
+    name: 'Frytki Ser',
+    category: 'dodatki',
+    price: 10.0,
+    ingredients: 'Małe (10,00 zł) / Duże',
+  },
+  {
+    id: 'extra-cola-500',
+    name: 'Napoje 0,5l',
+    category: 'dodatki',
+    price: 7.0,
+    ingredients: 'Coca-cola / Fanta / Lipton',
+  },
+  {
+    id: 'extra-cola-800',
+    name: 'Napoje 0,8l',
+    category: 'dodatki',
+    price: 8.0,
+    ingredients: 'Coca-cola / Fanta / Lipton',
+  },
+  {
+    id: 'extra-ayran',
+    name: 'Napój Turecki 0,3l',
+    category: 'dodatki',
+    price: 5.0,
+    ingredients: 'Ayran / Mango / Grape',
+  },
+  {
+    id: 'extra-juss',
+    name: 'Napój Energetyk Juss 0,3l',
+    category: 'dodatki',
+    price: 6.0,
+    ingredients: 'Juss napój energetyczny',
+  },
+  {
+    id: 'extra-mieso',
+    name: 'Dodatkowe Mięso',
+    category: 'dodatki',
+    price: 5.0,
+    ingredients: 'Dodatkowa porcja mięsa do dania',
+  },
+  {
+    id: 'extra-ser',
+    name: 'Dodatkowy Ser',
+    category: 'dodatki',
+    price: 3.0,
+    ingredients: 'Dodatkowa porcja sera do dania',
+  },
+  {
+    id: 'extra-opakowanie',
+    name: 'Opakowanie Na Wynos',
+    category: 'dodatki',
+    price: 1.0,
+    ingredients: 'Opakowanie termiczne na wynos',
+  },
+];

@@ -1,0 +1,6 @@
+{
+  "name": "BM King Kebab Łódź",
+  "description": "BM King Kebab w Łodzi – Złoty Laureat Orły Gastronomii 2025 & 2026. Autentyczna kuchnia kebab, świeże składniki, darmowa herbata turecka i szybka dostawa.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
