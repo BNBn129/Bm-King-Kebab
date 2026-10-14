@@ -1,162 +1,125 @@
 import React, { useState, useMemo } from 'react';
-import { Search, X, Sparkles, Leaf, Phone } from 'lucide-react';
-import { MENU_ITEMS, MENU_CATEGORIES, RESTAURANT_INFO, MenuItem } from '../data/restaurantData';
-
-interface CategoryGroup {
-  id: string;
-  label: string;
-  roman?: string;
-  desc?: string;
-  items: MenuItem[];
-}
+import { Search, Plus, Sparkles, Leaf, Flame, X } from 'lucide-react';
+import { MENU_ITEMS, MENU_CATEGORIES, MenuItem } from '../data/restaurantData';
+import { useCart } from '../context/CartContext';
+import { DishModal } from './DishModal';
 
 export const MenuSection: React.FC = () => {
+  const { setSelectedModalDish, selectedModalDish } = useCart();
   const [activeCategory, setActiveCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [vegetarianOnly, setVegetarianOnly] = useState<boolean>(false);
+  const [signatureOnly, setSignatureOnly] = useState<boolean>(false);
 
   const filteredItems = useMemo(() => {
     return MENU_ITEMS.filter((item) => {
+      // Category filter
       if (activeCategory !== 'all' && item.category !== activeCategory) {
         return false;
       }
+      // Vegetarian filter
+      if (vegetarianOnly && !item.isVegetarian) {
+        return false;
+      }
+      // Signature/Bestseller filter
+      if (signatureOnly && !item.isSignature && !item.isBestseller) {
+        return false;
+      }
+      // Search query
       if (searchQuery.trim() !== '') {
         const query = searchQuery.toLowerCase();
         const matchesName = item.name.toLowerCase().includes(query);
+        const matchesDesc = item.description.toLowerCase().includes(query);
         const matchesIngr = item.ingredients.toLowerCase().includes(query);
-        if (!matchesName && !matchesIngr) {
+        if (!matchesName && !matchesDesc && !matchesIngr) {
           return false;
         }
       }
       return true;
     });
-  }, [activeCategory, searchQuery]);
-
-  // Group items by category when viewing "all"
-  const groupedCategories = useMemo<CategoryGroup[]>(() => {
-    if (activeCategory !== 'all' || searchQuery.trim() !== '') {
-      return [{ id: activeCategory, label: 'Wybrane Pozycje', items: filteredItems }];
-    }
-    return [
-      {
-        id: 'tortilla',
-        label: 'Strefa Kebab Tortilla',
-        roman: 'I',
-        desc: 'Chrupiąca opieczona tortilla z obfitym nadzieniem i autorskimi sosami',
-        items: MENU_ITEMS.filter((i) => i.category === 'tortilla'),
-      },
-      {
-        id: 'box',
-        label: 'Strefa Kebab Box & Kapsalon',
-        roman: 'II',
-        desc: 'Wygodne boxy oraz słynny kapsalon zapiekany pod grubą warstwą sera',
-        items: MENU_ITEMS.filter((i) => i.category === 'box'),
-      },
-      {
-        id: 'pita',
-        label: 'Strefa Kebab Pita & Bułka',
-        roman: 'III',
-        desc: 'Tradycyjny chlebek pita oraz chrupiące tureckie pieczywo z pieca',
-        items: MENU_ITEMS.filter((i) => i.category === 'pita'),
-      },
-      {
-        id: 'talerz',
-        label: 'Strefa Talerz Królewski',
-        roman: 'IV',
-        desc: 'Pełnowymiarowe dania obiadowe z frytkami, górą mięsa i świeżymi surówkami',
-        items: MENU_ITEMS.filter((i) => i.category === 'talerz'),
-      },
-      {
-        id: 'burger',
-        label: 'Strefa Burgery z Grilla',
-        roman: 'V',
-        desc: 'Soczyste kotlety wołowo-baranie oraz drobiowe w chrupiących maślanych bułkach',
-        items: MENU_ITEMS.filter((i) => i.category === 'burger'),
-      },
-      {
-        id: 'wegetarianskie',
-        label: 'Strefa Wegetariańska',
-        roman: 'VI',
-        desc: 'Złocisty falafel z ciecierzycy oraz orzeźwiające sałatki z grecką fetą',
-        items: MENU_ITEMS.filter((i) => i.category === 'wegetarianskie'),
-      },
-      {
-        id: 'dodatki',
-        label: 'Nuggets, Dodatki & Napoje',
-        roman: 'VII',
-        desc: 'Chrupiące dodatki, gorące skrzydełka i oryginalne napoje tureckie',
-        items: MENU_ITEMS.filter((i) => i.category === 'dodatki'),
-      },
-    ];
-  }, [activeCategory, searchQuery, filteredItems]);
+  }, [activeCategory, searchQuery, vegetarianOnly, signatureOnly]);
 
   return (
-    <section id="menu" className="py-20 lg:py-28 bg-[#07080b] border-b border-[#1b1c26]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="menu" className="py-16 lg:py-24 bg-[#0b0c10] border-b border-[#232733]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Editorial Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 mb-3">
-            <span className="w-8 h-[1px] bg-amber-500/50" />
-            <p className="text-xs uppercase tracking-widest text-amber-400 font-semibold font-royal">
-              Carte Gastronomique
-            </p>
-            <span className="w-8 h-[1px] bg-amber-500/50" />
-          </div>
-          
-          <h2 className="text-3xl sm:text-5xl font-extrabold text-white font-royal tracking-wide [text-wrap:balance]">
-            Karta Menu & Cennik
-          </h2>
-          
-          <p className="mt-3 text-sm sm:text-base text-slate-400 max-w-xl mx-auto font-serif italic">
-            Wszystkie pozycje przyrządzane są na bieżąco z zachowaniem najwyższych standardów świeżości i smaku.
+        {/* Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <p className="text-xs uppercase font-semibold tracking-widest text-amber-500 mb-2">
+            Królewska Karta Dań
           </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight [text-wrap:balance]">
+            Menu & Cennik BM King Kebab
+          </h2>
+          <p className="mt-3 text-sm sm:text-base text-slate-300">
+            Świeże składniki, obfite porcje, autorskie sosy i tradycyjne pieczywo. 
+            Wybierz swoje ulubione danie, dostosuj skład i zamów z odbiorem lub dowozem.
+          </p>
+        </div>
 
-          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-slate-300 font-medium">
-            <span>Zamówienia na miejscu & telefonicznie:</span>
-            <a
-              href={`tel:${RESTAURANT_INFO.phoneRaw}`}
-              className="text-amber-400 hover:text-amber-300 font-mono font-bold tracking-wider inline-flex items-center gap-1 transition-colors"
-            >
-              <Phone className="w-3.5 h-3.5 fill-amber-400" />
-              <span>{RESTAURANT_INFO.phone}</span>
-            </a>
+        {/* Search & Quick Toggles Bar */}
+        <div className="mb-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          
+          {/* Search Input */}
+          <div className="relative w-full md:w-96">
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Szukaj dania, składnika (np. feta, kapsalon, falafel)..."
+              className="w-full pl-10 pr-10 py-2.5 bg-[#141721] border border-[#232733] rounded-lg text-xs sm:text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500 transition-colors"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                aria-label="Wyczyść wyszukiwanie"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            )}
           </div>
-        </div>
 
-        {/* Search Bar */}
-        <div className="max-w-md mx-auto mb-10 relative">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-amber-500/70" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Szukaj w karcie (np. kapsalon, feta, falafel, frytki)..."
-            className="w-full pl-11 pr-10 py-3.5 bg-[#0e1017] border border-[#222533] rounded-xl text-xs sm:text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500 focus:ring-1 focus:ring-amber-500/30 transition-all shadow-inner"
-          />
-          {searchQuery && (
+          {/* Special Preferences Toggles */}
+          <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
             <button
-              onClick={() => setSearchQuery('')}
-              className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
-              aria-label="Wyczyść wyszukiwanie"
+              onClick={() => setSignatureOnly(!signatureOnly)}
+              className={`px-3 py-2 text-xs font-medium rounded-lg border flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
+                signatureOnly
+                  ? 'bg-amber-500/15 border-amber-500 text-amber-300'
+                  : 'bg-[#141721] border-[#232733] text-slate-400 hover:text-slate-200'
+              }`}
             >
-              <X className="w-4 h-4" />
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span>Specjały & Bestsellery</span>
             </button>
-          )}
+
+            <button
+              onClick={() => setVegetarianOnly(!vegetarianOnly)}
+              className={`px-3 py-2 text-xs font-medium rounded-lg border flex items-center gap-1.5 transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
+                vegetarianOnly
+                  ? 'bg-emerald-500/15 border-emerald-500 text-emerald-300'
+                  : 'bg-[#141721] border-[#232733] text-slate-400 hover:text-slate-200'
+              }`}
+            >
+              <Leaf className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Tylko Wegetariańskie</span>
+            </button>
+          </div>
+
         </div>
 
-        {/* Elegant Category Navigation Tabs */}
-        <div className="mb-14 flex items-center justify-start lg:justify-center gap-1.5 overflow-x-auto pb-3 scrollbar-none border-b border-[#181a24]">
+        {/* Category Filter Tabs */}
+        <div className="mb-10 flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-none border-b border-[#1c202a]">
           {MENU_CATEGORIES.map((cat) => (
             <button
               key={cat.id}
-              onClick={() => {
-                setActiveCategory(cat.id);
-                setSearchQuery('');
-              }}
-              className={`px-4 py-2 text-xs font-semibold tracking-wider uppercase rounded-lg transition-all whitespace-nowrap shrink-0 cursor-pointer ${
+              onClick={() => setActiveCategory(cat.id)}
+              className={`px-4 py-2 text-xs sm:text-sm font-semibold rounded-lg transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
                 activeCategory === cat.id
-                  ? 'bg-amber-500 text-black shadow-lg shadow-amber-500/20 font-bold'
-                  : 'text-slate-400 hover:text-slate-200 hover:bg-[#12131b]'
+                  ? 'bg-amber-500 text-black shadow-md shadow-amber-500/15'
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/60'
               }`}
             >
               {cat.label}
@@ -164,121 +127,108 @@ export const MenuSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Menu Content Display */}
+        {/* Menu Items Grid */}
         {filteredItems.length === 0 ? (
-          <div className="text-center py-16 px-4 bg-[#0c0d14] rounded-2xl border border-[#1d1f2b] max-w-lg mx-auto">
-            <p className="text-base text-slate-300 font-medium">Brak dań spełniających podane kryteria.</p>
+          <div className="text-center py-16 px-4 bg-[#12141c] rounded-2xl border border-[#232733]">
+            <p className="text-base text-slate-300 font-medium">Brak pozycji spełniających wybrane kryteria.</p>
+            <p className="text-xs text-slate-500 mt-1">Spróbuj zresetować filtry lub zmienić frazę wyszukiwania.</p>
             <button
               onClick={() => {
                 setSearchQuery('');
                 setActiveCategory('all');
+                setVegetarianOnly(false);
+                setSignatureOnly(false);
               }}
-              className="mt-4 px-5 py-2.5 bg-amber-500 text-black font-bold text-xs uppercase tracking-wider rounded-lg hover:bg-amber-400 transition-colors cursor-pointer"
+              className="mt-4 px-4 py-2 bg-amber-500 text-black font-semibold text-xs rounded-lg hover:bg-amber-400 transition-colors"
             >
-              Pokaż całą kartę
+              Zresetuj filtry
             </button>
           </div>
         ) : (
-          <div className="space-y-16">
-            {groupedCategories.map((group) => {
-              if (group.items.length === 0) return null;
-              return (
-                <div key={group.id} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredItems.map((item) => (
+              <div
+                key={item.id}
+                className="group relative flex flex-col justify-between p-6 rounded-xl bg-[#12141a] border border-[#232733] hover:border-slate-700 hover:shadow-xl transition-all duration-200"
+              >
+                <div>
                   
-                  {/* Category Section Header */}
-                  <div className="pb-3 border-b border-[#1f2230] flex flex-col sm:flex-row sm:items-baseline justify-between gap-2">
-                    <div className="flex items-center gap-3">
-                      {group.roman && (
-                        <span className="text-xs font-bold text-amber-500 font-royal tracking-widest">
-                          [{group.roman}]
-                        </span>
-                      )}
-                      <h3 className="text-xl sm:text-2xl font-bold text-white font-royal tracking-wide">
-                        {group.label}
-                      </h3>
-                    </div>
-                    {group.desc && (
-                      <p className="text-xs text-slate-400 font-serif italic">
-                        {group.desc}
-                      </p>
+                  {/* Header Tag */}
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    {item.isSignature ? (
+                      <span className="text-[11px] font-semibold text-amber-400 flex items-center gap-1">
+                        <Flame className="w-3 h-3 text-amber-500" />
+                        Autorski Specjał
+                      </span>
+                    ) : item.isBestseller ? (
+                      <span className="text-[11px] font-semibold text-amber-300 flex items-center gap-1">
+                        <Sparkles className="w-3 h-3 text-amber-400" />
+                        Bestseller Łodzi
+                      </span>
+                    ) : item.isVegetarian ? (
+                      <span className="text-[11px] font-semibold text-emerald-400 flex items-center gap-1">
+                        <Leaf className="w-3 h-3 text-emerald-400" />
+                        Wegetariańskie
+                      </span>
+                    ) : (
+                      <span className="text-[11px] text-slate-500 uppercase tracking-wider">
+                        BM King Kebab
+                      </span>
+                    )}
+
+                    {/* Price with tabular nums */}
+                    <span className="text-base sm:text-lg font-bold text-amber-400 font-mono tabular-nums">
+                      {item.price.toFixed(2)} zł
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-lg font-bold text-white group-hover:text-amber-300 transition-colors">
+                    {item.name}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="mt-1.5 text-xs text-slate-300 leading-relaxed line-clamp-2">
+                    {item.description}
+                  </p>
+
+                  {/* Ingredients Clean Text */}
+                  <div className="mt-3 text-[11px] text-slate-400">
+                    <span className="text-slate-500 font-medium">Skład:</span> {item.ingredients}
+                  </div>
+                </div>
+
+                {/* Card Action Row with Working Add/Customize Button */}
+                <div className="mt-5 pt-4 border-t border-[#1d212b] flex items-center justify-between gap-3">
+                  <div className="text-[11px] text-slate-400">
+                    {item.sizes ? (
+                      <span>Rozmiary: {item.sizes.join(' · ')}</span>
+                    ) : (
+                      <span>Świeże na zamówienie</span>
                     )}
                   </div>
 
-                  {/* 2-Column Carte Layout */}
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-12 gap-y-6">
-                    {group.items.map((item: MenuItem) => (
-                      <div
-                        key={item.id}
-                        className="group flex flex-col justify-between py-2 border-b border-[#141620] hover:border-[#2d3246] transition-colors"
-                      >
-                        {/* Title, Leader Line, and Price */}
-                        <div className="flex items-baseline justify-between w-full">
-                          <div className="flex items-center gap-2">
-                            <span className="text-base font-bold text-white group-hover:text-amber-300 transition-colors">
-                              {item.name}
-                            </span>
-                            {item.isSignature && (
-                              <span className="text-[10px] font-bold text-amber-400 uppercase tracking-widest flex items-center gap-0.5">
-                                <Sparkles className="w-2.5 h-2.5" />
-                                <span>Specjał</span>
-                              </span>
-                            )}
-                            {item.isVegetarian && (
-                              <span className="text-[10px] font-bold text-emerald-400 uppercase tracking-widest flex items-center gap-0.5">
-                                <Leaf className="w-2.5 h-2.5" />
-                                <span>Vege</span>
-                              </span>
-                            )}
-                          </div>
-
-                          <div className="carte-leader" aria-hidden="true" />
-
-                          <span className="text-base font-bold text-amber-400 font-mono tabular-nums shrink-0 ml-2">
-                            {item.price.toFixed(2)} zł
-                          </span>
-                        </div>
-
-                        {/* Ingredients & Portion Sizes */}
-                        <div className="flex items-baseline justify-between text-xs text-slate-400 mt-1">
-                          <span className="text-slate-400 font-normal leading-relaxed pr-4">
-                            {item.ingredients}
-                          </span>
-                          {item.sizes && (
-                            <span className="text-[11px] text-slate-500 shrink-0 font-medium whitespace-nowrap">
-                              {item.sizes.join(' · ')}
-                            </span>
-                          )}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
+                  <button
+                    onClick={() => setSelectedModalDish(item)}
+                    className="flex items-center gap-1.5 px-3.5 py-2 bg-[#1b1f2b] hover:bg-amber-500 hover:text-black text-amber-400 font-semibold text-xs rounded-lg border border-[#2b3245] transition-all cursor-pointer active:scale-95 whitespace-nowrap shrink-0"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>Wybierz</span>
+                  </button>
                 </div>
-              );
-            })}
+
+              </div>
+            ))}
           </div>
         )}
 
-        {/* Footer Order Note */}
-        <div className="mt-16 p-6 rounded-2xl bg-[#0c0d14] border border-amber-500/20 text-center space-y-2">
-          <p className="text-sm font-bold text-white uppercase tracking-wider font-royal">
-            Świeże Dania na Zamówienie
-          </p>
-          <p className="text-xs text-slate-400 max-w-lg mx-auto">
-            Zapraszamy do lokalu przy ul. Sacharowa 45A w Łodzi lub do składania zamówień telefonicznych z odbiorem osobistym.
-          </p>
-          <div className="pt-2">
-            <a
-              href={`tel:${RESTAURANT_INFO.phoneRaw}`}
-              className="inline-flex items-center gap-2 text-base font-bold text-amber-400 hover:text-amber-300 font-mono tracking-wider transition-colors"
-            >
-              <Phone className="w-4 h-4 fill-amber-400" />
-              <span>{RESTAURANT_INFO.phone}</span>
-            </a>
-          </div>
-        </div>
-
       </div>
+
+      {/* Active Dish Customizer Modal */}
+      <DishModal
+        dish={selectedModalDish}
+        onClose={() => setSelectedModalDish(null)}
+      />
     </section>
   );
 };

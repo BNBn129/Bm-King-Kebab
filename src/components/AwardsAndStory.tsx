@@ -1,115 +1,138 @@
 import React from 'react';
-import { Award, Star, Car, Accessibility, ShieldCheck, Quote } from 'lucide-react';
-import { RESTAURANT_INFO } from '../data/restaurantData';
+import { Award, ShieldCheck, Heart, Car, Sparkles, CheckCircle2, Star } from 'lucide-react';
 
 export const AwardsAndStory: React.FC = () => {
   return (
-    <section id="nagrody" className="py-20 lg:py-28 bg-[#050507] border-b border-[#181a24]">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="o-nas" className="py-16 lg:py-24 bg-[#0e1017] border-b border-[#232733]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Prestige Plinth Container */}
-        <div className="relative rounded-3xl bg-gradient-to-b from-[#0f1018] via-[#090a0f] to-[#06070a] border border-amber-500/25 p-8 sm:p-14 shadow-2xl overflow-hidden">
-          
-          {/* Subtle Ambient Backlight */}
-          <div 
-            className="absolute -top-24 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-[100px] pointer-events-none" 
-            aria-hidden="true" 
-          />
+        {/* Editorial Section Header */}
+        <div className="max-w-3xl mb-16">
+          <p className="text-xs uppercase font-semibold tracking-widest text-amber-500 mb-2">
+            Pasja · Tradycja · Uznanie
+          </p>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight [text-wrap:balance]">
+            Dlaczego BM King Kebab zdobył serca mieszkańców Łodzi
+          </h2>
+          <p className="mt-4 text-base sm:text-lg text-slate-300 leading-relaxed">
+            BM King Kebab w Łodzi to wielokrotnie nagradzany punkt na kulinarnej mapie miasta. 
+            Jako Złoty Laureat plebiscytu „Orły Gastronomii” w latach 2025 i 2026, łączymy wielowiekową 
+            tradycję kuchni Bliskiego Wschodu z nowoczesnymi standardami czystości i najwyższej świeżości.
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        {/* Content Split: Story Pillars & Accolade Showcase (NO AI PHOTOS) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          {/* Left Column: 4 Pillars of Excellence */}
+          <div className="lg:col-span-6 space-y-8">
             
-            {/* Left Column: Golden Award Certificate */}
-            <div className="lg:col-span-5 text-center lg:text-left space-y-5">
+            <div className="flex gap-4">
+              <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0 text-amber-400 mt-1">
+                <Award className="w-5 h-5" />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-lg font-semibold text-white">Dwukrotny Złoty Laureat „Orły Gastronomii”</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Nagroda przyznawana na podstawie autentycznych ocen gości z całego kraju. 
+                  Średnia 4.9 gwiazdki z niemal tysiąca recenzji potwierdza stałą, powtarzalną jakość każdego dania.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0 text-amber-400 mt-1">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-lg font-semibold text-white">Sekret Soczystego Mięsa & Marynat</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Stawiamy na najwyższej jakości drób oraz wyselekcjonowaną wołowinę i baraninę, 
+                  marynowane przez wiele godzin w kompozycji ziół z Anatolii. Klienci szczególnie wyróżniają kruchość i wyrazistość naszego kurczaka.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0 text-amber-400 mt-1">
+                <Heart className="w-5 h-5" />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-lg font-semibold text-white">Królewska Gościnność & Świeże Surówki</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Wierzymy, że jedzenie to relacja. Każde zamówienie przygotowujemy na bieżąco, 
+                  dbając o chrupkość surówek, gorące pieczywo i nienaganną czystość.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="w-10 h-10 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center shrink-0 text-amber-400 mt-1">
+                <Car className="w-5 h-5" />
+              </div>
+              <div className="space-y-1">
+                <h3 className="text-lg font-semibold text-white">Wygoda: Parking, Podjazd & Szybka Dostawa</h3>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Lokal przy ul. Andrzeja Sacharowa 45A dysponuje bezpłatnymi miejscami parkingowymi, 
+                  jest w pełni dostępny dla wózków inwalidzkich oraz realizuje zamówienia z szybkim dowozem na terenie całej Łodzi.
+                </p>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column: Prestigious Certificate & Values Plinth (NO AI PHOTOS) */}
+          <div className="lg:col-span-6 space-y-6">
+            
+            <div className="p-8 rounded-2xl bg-gradient-to-br from-[#151824] to-[#0c0d14] border border-amber-500/30 shadow-2xl space-y-6">
               
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-[11px] font-bold uppercase tracking-widest text-amber-300">
-                <Award className="w-3.5 h-3.5 text-amber-400" />
-                <span>Plebiscyt Ogólnopolski</span>
+              <div className="flex items-center justify-between border-b border-[#232733] pb-4">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-amber-400">
+                  <Award className="w-5 h-5 text-amber-500" />
+                  <span>Certyfikat Doskonałości Kulinarnej</span>
+                </div>
+                <div className="flex items-center gap-1 text-xs text-amber-400 font-mono">
+                  <Star className="w-4 h-4 fill-amber-400" />
+                  <span>4.9 / 5.0</span>
+                </div>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-white font-royal tracking-wide leading-tight">
-                Złoty Laureat <br />
-                <span className="text-gold-gradient">Orły Gastronomii</span>
-              </h2>
+              <div className="space-y-2 text-center py-4">
+                <p className="text-xs uppercase tracking-widest text-slate-400 font-semibold">Plebiscyt Ogólnopolski</p>
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white font-display">
+                  ORŁY GASTRONOMII
+                </h3>
+                <p className="text-amber-400 text-lg font-bold font-mono">
+                  Złoty Laureat 2025 & 2026
+                </p>
+                <p className="text-xs text-slate-300 max-w-sm mx-auto pt-2">
+                  Oficjalne wyróżnienie dla BM King Kebab w Łodzi za stałą jakość, higienę i zaufanie gości.
+                </p>
+              </div>
 
-              <p className="text-sm text-slate-300 leading-relaxed font-serif italic">
-                Wyróżnienie przyznane dwukrotnie — w 2025 oraz 2026 roku — za bezkompromisową jakość potraw, 
-                czystość oraz najwyższy wskaźnik zadowolenia gości w Łodzi.
-              </p>
-
-              {/* Verified Rating Metric */}
-              <div className="pt-2 flex items-center justify-center lg:justify-start gap-4">
-                <div className="p-4 rounded-xl bg-[#09090d] border border-[#1f2230] text-center">
-                  <div className="flex items-center justify-center gap-1 text-amber-400 font-bold font-mono text-xl">
-                    <Star className="w-5 h-5 fill-amber-400" />
-                    <span>4.9</span>
-                  </div>
-                  <p className="text-[10px] text-slate-400 uppercase tracking-wider mt-1 font-medium">
-                    Ocena z 928 opinii
-                  </p>
+              <div className="grid grid-cols-2 gap-3 pt-2 border-t border-[#232733] text-center">
+                <div className="p-3 rounded-lg bg-[#0b0c10] border border-[#1f232f]">
+                  <p className="text-base font-bold text-white font-mono">928+</p>
+                  <p className="text-[11px] text-slate-400">Opinii Restaurant Guru & Google</p>
                 </div>
-
-                <div className="p-4 rounded-xl bg-[#09090d] border border-[#1f2230] text-center">
-                  <p className="text-xl font-bold text-white font-royal">2025 & 2026</p>
-                  <p className="text-[10px] text-amber-400 uppercase tracking-wider mt-1 font-medium">
-                    Złote Godło
-                  </p>
+                <div className="p-3 rounded-lg bg-[#0b0c10] border border-[#1f232f]">
+                  <p className="text-base font-bold text-emerald-400 font-mono">100%</p>
+                  <p className="text-[11px] text-slate-400">Świeże mięso & własne sosy</p>
                 </div>
               </div>
 
             </div>
 
-            {/* Right Column: Culinary Pillars & Real Guest Praise */}
-            <div className="lg:col-span-7 space-y-6">
-              
-              {/* Feature 1 */}
-              <div className="p-5 rounded-2xl bg-[#0a0b10] border border-[#1a1c26] space-y-1.5">
-                <div className="flex items-center gap-2.5">
-                  <ShieldCheck className="w-4 h-4 text-amber-400 shrink-0" />
-                  <h3 className="text-sm font-bold text-white uppercase tracking-wider">
-                    Starannie Selekcjonowane Mięso & Autorskie Zioła
-                  </h3>
-                </div>
-                <p className="text-xs text-slate-300 leading-relaxed pl-6">
-                  Soczysty kurczak i wyselekcjonowane mięso wołowo-baranie, pieczone tradycyjną metodą 
-                  i podawane w chrupiącym pieczywie z pieca ze świeżo krojonymi surówkami.
-                </p>
-              </div>
-
-              {/* Feature 2: Editorial Review Quote */}
-              <div className="p-5 rounded-2xl bg-[#0a0b10] border border-[#1a1c26] space-y-2 relative">
-                <Quote className="w-5 h-5 text-amber-500/40 absolute top-4 right-4" />
-                <div className="flex items-center gap-1 text-amber-400">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400" />
-                  ))}
-                </div>
-                <blockquote className="text-xs text-slate-200 italic leading-relaxed">
-                  "Bez wątpienia jeden z najlepszych kebabów w Łodzi. Soczyste mięso, ogromne porcje i świetne autorskie sosy. Zdecydowanie polecam każdemu."
-                </blockquote>
-                <p className="text-[11px] text-slate-400 font-medium pt-1">
-                  — Zweryfikowana opinia gościa · Restaurant Guru & Google
-                </p>
-              </div>
-
-              {/* Feature 3: Parking & Accessibility */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-[#0a0b10] border border-[#1a1c26] flex items-center gap-3">
-                  <Car className="w-5 h-5 text-amber-400 shrink-0" />
-                  <div>
-                    <p className="text-xs font-bold text-white">Darmowy Parking</p>
-                    <p className="text-[11px] text-slate-400">Przed samym wejściem</p>
-                  </div>
-                </div>
-
-                <div className="p-4 rounded-xl bg-[#0a0b10] border border-[#1a1c26] flex items-center gap-3">
-                  <Accessibility className="w-5 h-5 text-amber-400 shrink-0" />
-                  <div>
-                    <p className="text-xs font-bold text-white">Dostęp dla Wózków</p>
-                    <p className="text-[11px] text-slate-400">Wygodny podjazd bez barier</p>
-                  </div>
-                </div>
-              </div>
-
+            {/* Inclusivity & Dietary Note */}
+            <div className="p-6 rounded-xl bg-[#141721] border border-[#232733] space-y-3">
+              <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-amber-400" />
+                Menu Przyjazne Wszystkim Preferencjom
+              </h4>
+              <p className="text-xs text-slate-300 leading-relaxed">
+                Oprócz klasycznych mięs oferujemy pyszne opcje wegetariańskie (chrupiący falafel, sałatka grecka z oryginalną fetą), 
+                różnorodne rozmiary porcji dopasowane do każdego apetytu oraz pełną przejrzystość składników i alergenów.
+              </p>
             </div>
 
           </div>

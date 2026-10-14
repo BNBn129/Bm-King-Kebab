@@ -1,88 +1,120 @@
 import React from 'react';
-import { Phone, MapPin, Award } from 'lucide-react';
+import { Phone, MapPin, Award, ExternalLink } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
-import { Logo } from './Logo';
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#030305] border-t border-[#14151e] text-slate-400 text-xs">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <footer className="bg-[#08090c] border-t border-[#1c1f28] text-slate-400 text-xs">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
           
-          {/* Column 1: Brand & Logo */}
-          <div className="space-y-4">
-            <div className="flex items-center gap-3">
-              <Logo size={46} />
-              <div>
-                <p className="text-lg font-black text-white font-royal">
-                  BM <span className="text-amber-500">KING</span> KEBAB
-                </p>
-                <p className="text-[11px] text-slate-400">{RESTAURANT_INFO.addressShort}</p>
-              </div>
-            </div>
-            <p className="text-slate-400 text-xs leading-relaxed font-serif italic max-w-sm">
-              Królewska tradycja smaku w Łodzi. Świeże składniki, obfite porcje i wysoka jakość doceniona przez gości.
+          {/* Column 1: Brand & Accolade */}
+          <div className="space-y-4 md:col-span-1">
+            <a href="#" className="inline-block text-xl font-bold tracking-wider text-white">
+              <span className="text-amber-500 font-display">BM KING</span>
+              <span className="font-light tracking-widest text-slate-300 ml-1.5">KEBAB</span>
+            </a>
+            <p className="text-slate-400 leading-relaxed text-xs">
+              Królewska tradycja smaku w Łodzi. Laureat plebiscytu Orły Gastronomii 2025 i 2026. 
+              Soczyste mięso, świeże warzywa i najwyższa jakość.
             </p>
-            <div className="flex items-center gap-1.5 text-amber-400 font-semibold text-xs font-royal">
+            <div className="flex items-center gap-2 text-amber-400 font-medium text-xs">
               <Award className="w-4 h-4 text-amber-500" />
-              <span>Złoty Laureat Orły Gastronomii 2025 & 2026</span>
+              <span>Złoty Laureat 2025 & 2026</span>
             </div>
           </div>
 
-          {/* Column 2: Hours */}
+          {/* Column 2: Navigation Links */}
           <div className="space-y-3">
-            <p className="font-bold text-slate-200 uppercase tracking-widest text-[11px] font-royal">
-              Godziny Pracy
-            </p>
-            <ul className="space-y-2 text-xs text-slate-300">
-              <li className="flex justify-between border-b border-[#111219] pb-1">
-                <span>Niedziela – Czwartek:</span>
-                <span className="font-mono text-slate-300">09:00 – 01:00</span>
+            <p className="font-semibold text-slate-200 uppercase tracking-wider text-[11px]">Nawigacja</p>
+            <ul className="space-y-2">
+              <li>
+                <a href="#menu" className="hover:text-amber-400 transition-colors">
+                  Menu & Cennik
+                </a>
               </li>
-              <li className="flex justify-between border-b border-[#111219] pb-1">
-                <span>Piątek – Sobota:</span>
-                <span className="font-mono text-slate-300">09:00 – 02:00</span>
+              <li>
+                <a href="#o-nas" className="hover:text-amber-400 transition-colors">
+                  O Nas & Orły Gastronomii
+                </a>
+              </li>
+              <li>
+                <a href="#specjaly" className="hover:text-amber-400 transition-colors">
+                  Specjalności Szefa
+                </a>
+              </li>
+              <li>
+                <a href="#opinie" className="hover:text-amber-400 transition-colors">
+                  Opinie Gości (4.9 / 5)
+                </a>
+              </li>
+              <li>
+                <a href="#kontakt" className="hover:text-amber-400 transition-colors">
+                  Lokalizacja & Godziny
+                </a>
               </li>
             </ul>
-            <p className="text-[11px] text-slate-500 pt-1 font-serif italic">
-              Serwujemy dania na miejscu oraz przygotowujemy zamówienia na wynos.
+          </div>
+
+          {/* Column 3: Hours Summary */}
+          <div className="space-y-3">
+            <p className="font-semibold text-slate-200 uppercase tracking-wider text-[11px]">Godziny Pracy</p>
+            <ul className="space-y-1.5 text-xs text-slate-300">
+              <li className="flex justify-between">
+                <span>Niedziela – Czwartek:</span>
+                <span className="font-mono text-slate-400">09:00 – 01:00</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Piątek – Sobota:</span>
+                <span className="font-mono text-slate-400">09:00 – 02:00</span>
+              </li>
+            </ul>
+            <p className="text-[11px] text-slate-500 pt-1">
+              Realizujemy zamówienia na miejscu, na wynos i w dowozie.
             </p>
           </div>
 
-          {/* Column 3: Contact */}
+          {/* Column 4: Contact & Order */}
           <div className="space-y-3">
-            <p className="font-bold text-slate-200 uppercase tracking-widest text-[11px] font-royal">
-              Kontakt & Adres
-            </p>
+            <p className="font-semibold text-slate-200 uppercase tracking-wider text-[11px]">Kontakt & Zamówienia</p>
             <div className="space-y-2 text-xs">
-              <div className="flex items-start gap-2.5">
+              <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
-                <span className="text-slate-200">{RESTAURANT_INFO.address}</span>
+                <span>{RESTAURANT_INFO.address}</span>
               </div>
-              <div className="flex items-center gap-2.5 pt-1">
+              <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-amber-500 shrink-0" />
-                <a
-                  href={`tel:${RESTAURANT_INFO.phoneRaw}`}
-                  className="text-amber-400 hover:text-amber-300 font-mono font-bold text-base transition-colors"
-                >
+                <a href={`tel:${RESTAURANT_INFO.phoneRaw}`} className="text-white hover:text-amber-400 font-mono font-bold transition-colors">
                   {RESTAURANT_INFO.phone}
                 </a>
               </div>
+            </div>
+
+            <div className="pt-2">
+              <a
+                href={RESTAURANT_INFO.pyszneUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-amber-400 hover:text-amber-300 text-xs font-semibold transition-colors"
+              >
+                <span>Oficjalne zamówienia na Pyszne.pl</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
 
         </div>
 
-        {/* Bottom bar */}
-        <div className="mt-14 pt-6 border-t border-[#11121a] flex flex-col sm:flex-row items-center justify-between gap-3 text-[11px] text-slate-500">
+        {/* Bottom Clean Row */}
+        <div className="mt-12 pt-6 border-t border-[#181a22] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <p>© {new Date().getFullYear()} BM KING KEBAB Łódź. Wszelkie prawa zastrzeżone.</p>
           <div className="flex items-center gap-4">
-            <a href="#menu" className="hover:text-amber-400 transition-colors uppercase tracking-wider">Karta Menu</a>
+            <a href="#menu" className="hover:text-slate-400 transition-colors">Menu</a>
             <span>·</span>
-            <a href="#nagrody" className="hover:text-amber-400 transition-colors uppercase tracking-wider">Orły Gastronomii</a>
+            <a href="#kontakt" className="hover:text-slate-400 transition-colors">Dojazd</a>
             <span>·</span>
-            <a href="#kontakt" className="hover:text-amber-400 transition-colors uppercase tracking-wider">Dojazd</a>
+            <a href={`tel:${RESTAURANT_INFO.phoneRaw}`} className="hover:text-slate-400 transition-colors">Telefon</a>
           </div>
         </div>
 
