@@ -1,8 +1,18 @@
 import React from 'react';
-import { Phone, MapPin, Award, ExternalLink } from 'lucide-react';
+import { Phone, MapPin, Award, ExternalLink, ArrowRight } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
+import { TabType } from './Navbar';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  onSelectTab: (tab: TabType) => void;
+}
+
+export const Footer: React.FC<FooterProps> = ({ onSelectTab }) => {
+  const handleNav = (tab: TabType) => {
+    onSelectTab(tab);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <footer className="bg-[#08090c] border-t border-[#1c1f28] text-slate-400 text-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
@@ -11,13 +21,16 @@ export const Footer: React.FC = () => {
           
           {/* Column 1: Brand & Accolade */}
           <div className="space-y-4 md:col-span-1">
-            <a href="#" className="inline-block text-xl font-bold tracking-wider text-white">
+            <button
+              onClick={() => handleNav('home')}
+              className="text-left inline-block text-xl font-bold tracking-wider text-white hover:text-amber-400 transition-colors cursor-pointer"
+            >
               <span className="text-amber-500 font-display">BM KING</span>
               <span className="font-light tracking-widest text-slate-300 ml-1.5">KEBAB</span>
-            </a>
+            </button>
             <p className="text-slate-400 leading-relaxed text-xs">
               Królewska tradycja smaku w Łodzi. Laureat plebiscytu Orły Gastronomii 2025 i 2026. 
-              Soczyste mięso, świeże warzywa i najwyższa jakość.
+              Soczyste mięso, świeże warzywa i bezpłatna turecka herbata.
             </p>
             <div className="flex items-center gap-2 text-amber-400 font-medium text-xs">
               <Award className="w-4 h-4 text-amber-500" />
@@ -25,34 +38,57 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Column 2: Navigation Links */}
+          {/* Column 2: Navigation Links (Switching Tabs) */}
           <div className="space-y-3">
-            <p className="font-semibold text-slate-200 uppercase tracking-wider text-[11px]">Nawigacja</p>
+            <p className="font-semibold text-slate-200 uppercase tracking-wider text-[11px]">Zakładki Serwisu</p>
             <ul className="space-y-2">
               <li>
-                <a href="#menu" className="hover:text-amber-400 transition-colors">
-                  Menu & Cennik
-                </a>
+                <button
+                  onClick={() => handleNav('home')}
+                  className="hover:text-amber-400 transition-colors cursor-pointer text-left"
+                >
+                  Strona Główna
+                </button>
               </li>
               <li>
-                <a href="#o-nas" className="hover:text-amber-400 transition-colors">
+                <button
+                  onClick={() => handleNav('menu')}
+                  className="hover:text-amber-400 transition-colors cursor-pointer text-left"
+                >
+                  Królewskie Menu & Cennik
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => handleNav('about')}
+                  className="hover:text-amber-400 transition-colors cursor-pointer text-left"
+                >
                   O Nas & Orły Gastronomii
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#specjaly" className="hover:text-amber-400 transition-colors">
-                  Specjalności Szefa
-                </a>
+                <button
+                  onClick={() => handleNav('gallery')}
+                  className="hover:text-amber-400 transition-colors cursor-pointer text-left"
+                >
+                  Specjalności & Galeria
+                </button>
               </li>
               <li>
-                <a href="#opinie" className="hover:text-amber-400 transition-colors">
+                <button
+                  onClick={() => handleNav('reviews')}
+                  className="hover:text-amber-400 transition-colors cursor-pointer text-left"
+                >
                   Opinie Gości (4.9 / 5)
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#kontakt" className="hover:text-amber-400 transition-colors">
+                <button
+                  onClick={() => handleNav('contact')}
+                  className="hover:text-amber-400 transition-colors cursor-pointer text-left"
+                >
                   Lokalizacja & Godziny
-                </a>
+                </button>
               </li>
             </ul>
           </div>
@@ -110,9 +146,9 @@ export const Footer: React.FC = () => {
         <div className="mt-12 pt-6 border-t border-[#181a22] flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
           <p>© {new Date().getFullYear()} BM KING KEBAB Łódź. Wszelkie prawa zastrzeżone.</p>
           <div className="flex items-center gap-4">
-            <a href="#menu" className="hover:text-slate-400 transition-colors">Menu</a>
+            <button onClick={() => handleNav('menu')} className="hover:text-slate-400 transition-colors cursor-pointer">Menu</button>
             <span>·</span>
-            <a href="#kontakt" className="hover:text-slate-400 transition-colors">Dojazd</a>
+            <button onClick={() => handleNav('contact')} className="hover:text-slate-400 transition-colors cursor-pointer">Dojazd</button>
             <span>·</span>
             <a href={`tel:${RESTAURANT_INFO.phoneRaw}`} className="hover:text-slate-400 transition-colors">Telefon</a>
           </div>

@@ -86,22 +86,22 @@ export const DishModal: React.FC<DishModalProps> = ({ dish, onClose }) => {
   ];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-black/80 backdrop-blur-sm animate-fade-in">
       <div 
-        className="relative w-full max-w-lg bg-[#12141c] border border-[#232733] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+        className="relative w-full max-w-lg bg-[#11131c] border border-[#202534] rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] sm:max-h-[88vh] animate-scale-up"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="flex items-center justify-between p-6 border-b border-[#232733] bg-[#161922]">
+        <div className="flex items-center justify-between p-3.5 sm:p-5 lg:p-6 border-b border-[#232733] bg-[#161922]">
           <div>
-            <h3 className="text-xl font-bold text-white font-display">{dish.name}</h3>
-            <p className="text-xs text-amber-400 font-medium mt-0.5 font-mono tabular-nums">
+            <h3 className="text-base sm:text-lg md:text-xl font-bold text-white font-display">{dish.name}</h3>
+            <p className="text-[11px] sm:text-xs text-amber-400 font-medium mt-0.5 font-mono tabular-nums">
               Cena bazowa: {dish.price.toFixed(2)} zł
             </p>
           </div>
           <button
             onClick={onClose}
-            className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+            className="p-1.5 sm:p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
             aria-label="Zamknij"
           >
             <X className="w-5 h-5" />
@@ -109,7 +109,7 @@ export const DishModal: React.FC<DishModalProps> = ({ dish, onClose }) => {
         </div>
 
         {/* Modal Scrollable Body */}
-        <div className="p-6 overflow-y-auto space-y-6 text-sm">
+        <div className="p-4 sm:p-6 overflow-y-auto space-y-4 sm:space-y-6 text-sm">
           
           {/* Ingredients Note */}
           <div className="p-3 rounded-lg bg-[#0b0c10] border border-[#1f232f] text-xs text-slate-300">
@@ -256,10 +256,10 @@ export const DishModal: React.FC<DishModalProps> = ({ dish, onClose }) => {
         </div>
 
         {/* Modal Footer with Final Action */}
-        <div className="p-4 sm:p-6 border-t border-[#232733] bg-[#161922] flex items-center justify-between gap-4">
-          <div>
-            <p className="text-[11px] text-slate-400">Łączna kwota pozycji</p>
-            <p className="text-xl font-bold text-amber-400 font-mono tabular-nums">
+        <div className="p-3.5 sm:p-5 lg:p-6 border-t border-[#232733] bg-[#161922] flex items-center justify-between gap-3 sm:gap-4">
+          <div className="shrink-0">
+            <p className="text-[10px] sm:text-[11px] text-slate-400">Łączna kwota</p>
+            <p className="text-lg sm:text-xl font-bold text-amber-400 font-mono tabular-nums">
               {totalPrice.toFixed(2)} zł
             </p>
           </div>
@@ -267,7 +267,7 @@ export const DishModal: React.FC<DishModalProps> = ({ dish, onClose }) => {
           <button
             onClick={handleConfirm}
             disabled={addedSuccess}
-            className="flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-lg shadow-amber-500/20 active:scale-95 cursor-pointer disabled:opacity-80"
+            className="flex items-center justify-center gap-1.5 sm:gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-amber-500 hover:bg-amber-400 text-black font-bold text-xs uppercase tracking-wider rounded-lg transition-all shadow-lg shadow-amber-500/20 active:scale-95 cursor-pointer disabled:opacity-80 whitespace-nowrap"
           >
             {addedSuccess ? (
               <>

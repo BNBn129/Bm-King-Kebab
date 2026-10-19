@@ -4,6 +4,8 @@ import { RESTAURANT_INFO } from '../data/restaurantData';
 
 export const LocationAndHours: React.FC = () => {
   const [copiedAddress, setCopiedAddress] = useState(false);
+
+  // Determine current day of week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
   const todayIndex = new Date().getDay();
 
   const handleCopyAddress = () => {
@@ -13,56 +15,56 @@ export const LocationAndHours: React.FC = () => {
   };
 
   return (
-    <section id="kontakt" className="py-16 lg:py-24 bg-[#0e1017] border-b border-[#232733]">
+    <section id="kontakt" className="py-10 sm:py-16 lg:py-20 bg-[#0e1017] border-b border-[#232733]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
-        <div className="max-w-3xl mb-16">
-          <p className="text-xs uppercase font-semibold tracking-widest text-amber-500 mb-2">
+        <div className="max-w-3xl mb-4 sm:mb-8 lg:mb-16">
+          <p className="text-[10px] sm:text-[11px] lg:text-xs uppercase font-semibold tracking-widest text-amber-500 mb-1 sm:mb-2">
             Gdzie Nas Znaleźć
           </p>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight leading-tight [text-wrap:balance]">
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold text-white tracking-tight leading-tight [text-wrap:balance]">
             Odwiedź BM King Kebab w Łodzi
           </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-300">
+          <p className="mt-1 sm:mt-1.5 text-xs sm:text-xs md:text-sm lg:text-base text-slate-300">
             Czekamy na Ciebie przy ulicy Andrzeja Sacharowa 45A na łódzkim Widzewie. 
             Serwujemy posiłki na miejscu, przygotowujemy zamówienia na wynos oraz realizujemy szybkie dowozy.
           </p>
         </div>
 
-        {/* 2-Column Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* 2-Column Grid: Hours Table & Map Information */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6 lg:gap-12 items-start">
           
           {/* Left Column: Weekly Hours & Amenities */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-3 sm:space-y-4 lg:space-y-6">
             
-            <div className="p-6 rounded-2xl bg-[#12141a] border border-[#232733] space-y-5">
-              <div className="flex items-center gap-3 pb-3 border-b border-[#232733]">
-                <Clock className="w-5 h-5 text-amber-400" />
+            <div className="p-3.5 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl bg-[#12141a] border border-[#232733] space-y-3 sm:space-y-4 lg:space-y-5">
+              <div className="flex items-center gap-2.5 sm:gap-3 pb-2.5 sm:pb-3 border-b border-[#232733]">
+                <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-amber-400" />
                 <div>
-                  <h3 className="text-base font-bold text-white">Godziny Otwarcia</h3>
-                  <p className="text-xs text-amber-400/90 font-medium">Otwarte 7 dni w tygodniu do późnych godzin</p>
+                  <h3 className="text-xs sm:text-sm md:text-base font-bold text-white">Godziny Otwarcia</h3>
+                  <p className="text-[10px] sm:text-xs text-amber-400/90 font-medium">Otwarte 7 dni w tygodniu do późnych godzin</p>
                 </div>
               </div>
 
               {/* Weekly Schedule Rows */}
-              <div className="space-y-2.5">
+              <div className="space-y-1.5 sm:space-y-2">
                 {RESTAURANT_INFO.schedule.map((item) => {
                   const isToday = item.dayIndex === todayIndex;
                   return (
                     <div
                       key={item.day}
-                      className={`flex items-center justify-between text-xs py-1.5 px-3 rounded-lg transition-colors ${
+                      className={`flex items-center justify-between text-[11px] sm:text-xs py-1 sm:py-1.5 px-2 sm:px-3 rounded-lg transition-colors ${
                         isToday
                           ? 'bg-amber-500/15 border border-amber-500/30 font-semibold text-amber-300'
                           : 'text-slate-300'
                       }`}
                     >
-                      <span className="flex items-center gap-2">
+                      <span className="flex items-center gap-1.5 sm:gap-2">
                         {item.day}
                         {isToday && (
-                          <span className="text-[10px] text-amber-400 uppercase tracking-wider font-bold">
-                            (Dzisiaj)
+                          <span className="text-[9px] sm:text-[10px] text-amber-400 uppercase tracking-wider font-bold">
+                            (Dziś)
                           </span>
                         )}
                       </span>
@@ -76,63 +78,68 @@ export const LocationAndHours: React.FC = () => {
             </div>
 
             {/* Amenities Cards */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="p-4 rounded-xl bg-[#12141a] border border-[#232733] text-center space-y-1.5">
-                <Car className="w-5 h-5 text-amber-400 mx-auto" />
-                <p className="text-xs font-semibold text-white">Darmowy Parking</p>
-                <p className="text-[10px] text-slate-400">Przed lokalem</p>
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
+              <div className="p-2 sm:p-3 lg:p-4 rounded-xl bg-[#12141a] border border-[#232733] text-center space-y-1">
+                <Car className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-amber-400 mx-auto" />
+                <p className="text-[10px] sm:text-[11px] md:text-xs font-semibold text-white">Darmowy Parking</p>
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] text-slate-400">Przed lokalem</p>
               </div>
 
-              <div className="p-4 rounded-xl bg-[#12141a] border border-[#232733] text-center space-y-1.5">
-                <Accessibility className="w-5 h-5 text-amber-400 mx-auto" />
-                <p className="text-xs font-semibold text-white">Dla Wózków</p>
-                <p className="text-[10px] text-slate-400">Podjazd bez barier</p>
+              <div className="p-2 sm:p-3 lg:p-4 rounded-xl bg-[#12141a] border border-[#232733] text-center space-y-1">
+                <Accessibility className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-amber-400 mx-auto" />
+                <p className="text-[10px] sm:text-[11px] md:text-xs font-semibold text-white">Dla Wózków</p>
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] text-slate-400">Podjazd bez barier</p>
+              </div>
+
+              <div className="p-2 sm:p-3 lg:p-4 rounded-xl bg-[#12141a] border border-[#232733] text-center space-y-1">
+                <Coffee className="w-3.5 h-3.5 sm:w-4 sm:h-4 lg:w-5 lg:h-5 text-amber-400 mx-auto" />
+                <p className="text-[10px] sm:text-[11px] md:text-xs font-semibold text-white">Herbata Gratis</p>
+                <p className="text-[8px] sm:text-[9px] md:text-[10px] text-slate-400">Na powitanie</p>
               </div>
             </div>
 
           </div>
 
-          {/* Right Column: Address Details & Map */}
-          <div className="lg:col-span-7 space-y-6">
+          {/* Right Column: Address Details & Interactive Route Container */}
+          <div className="lg:col-span-7 space-y-3 sm:space-y-4 lg:space-y-6">
             
-            <div className="p-8 rounded-2xl bg-[#12141a] border border-[#232733] space-y-6">
+            <div className="p-3.5 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl bg-[#12141a] border border-[#232733] space-y-3 sm:space-y-4 lg:space-y-6">
               
               {/* Contact & Address Block */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pb-6 border-b border-[#232733]">
-                <div className="space-y-1.5">
-                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
-                    <MapPin className="w-4 h-4 text-amber-400" />
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-6 pb-3 sm:pb-4 lg:pb-6 border-b border-[#232733]">
+                <div className="space-y-0.5 sm:space-y-1">
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400">
+                    <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
                     <span>Adres Restauracji</span>
                   </div>
-                  <p className="text-base font-bold text-white">{RESTAURANT_INFO.address}</p>
-                  <p className="text-xs text-slate-400">Łódź Widzew · 92-517</p>
+                  <p className="text-xs sm:text-sm md:text-base font-bold text-white">{RESTAURANT_INFO.address}</p>
+                  <p className="text-[10px] sm:text-xs text-slate-400">Łódź Widzew · 92-517</p>
                 </div>
 
-                <div className="space-y-1.5">
-                  <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-slate-400">
-                    <Phone className="w-4 h-4 text-amber-400" />
+                <div className="space-y-0.5 sm:space-y-1">
+                  <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-slate-400">
+                    <Phone className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-amber-400" />
                     <span>Kontakt Telefoniczny</span>
                   </div>
                   <a
                     href={`tel:${RESTAURANT_INFO.phoneRaw}`}
-                    className="text-base font-bold text-amber-400 hover:text-amber-300 font-mono transition-colors block"
+                    className="text-xs sm:text-sm md:text-base font-bold text-amber-400 hover:text-amber-300 font-mono transition-colors block"
                   >
                     {RESTAURANT_INFO.phone}
                   </a>
-                  <p className="text-xs text-slate-400">Szybkie zamówienia z odbiorem i dowozem</p>
+                  <p className="text-[10px] sm:text-xs text-slate-400">Szybkie zamówienia z odbiorem i dowozem</p>
                 </div>
               </div>
 
               {/* Action Buttons: Copy Address & Google Route */}
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
                 <a
                   href={RESTAURANT_INFO.googleMapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-5 py-3 bg-amber-500 hover:bg-amber-400 text-black font-semibold text-xs uppercase tracking-wider rounded-lg transition-all shadow-lg shadow-amber-500/10 active:scale-98"
+                  className="flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 lg:px-5 lg:py-3 bg-amber-500 hover:bg-amber-400 text-black font-semibold text-[11px] sm:text-xs uppercase tracking-wider rounded-lg transition-all shadow-lg shadow-amber-500/10 active:scale-98"
                 >
-                  <Navigation className="w-4 h-4" />
-                  <span>Nawiguj w Google Maps</span>
+                  <Navigation className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </a>
 
                 <button

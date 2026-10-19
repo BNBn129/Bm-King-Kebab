@@ -62,18 +62,18 @@ export const CartDrawer: React.FC = () => {
     <div className="fixed inset-0 z-50 overflow-hidden bg-black/70 backdrop-blur-sm animate-fade-in">
       <div className="absolute inset-0" onClick={() => setIsCartOpen(false)} />
 
-      <div className="absolute inset-y-0 right-0 max-w-full flex pl-10">
-        <div className="w-screen max-w-md bg-[#12141c] border-l border-[#232733] flex flex-col shadow-2xl">
+      <div className="absolute inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
+        <div className="w-screen max-w-full sm:max-w-md lg:max-w-lg bg-[#11131c] border-l border-[#202534] flex flex-col shadow-2xl animate-slide-in-right">
           
           {/* Drawer Header */}
-          <div className="p-6 border-b border-[#232733] bg-[#161922] flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-9 h-9 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
-                <ShoppingBag className="w-5 h-5" />
+          <div className="p-4 sm:p-6 border-b border-[#232733] bg-[#161922] flex items-center justify-between">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400">
+                <ShoppingBag className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white font-display">Twoje Zamówienie</h3>
-                <p className="text-xs text-slate-400 font-mono tabular-nums">
+                <h3 className="text-base sm:text-lg font-bold text-white font-display">Twoje Zamówienie</h3>
+                <p className="text-[11px] sm:text-xs text-slate-400 font-mono tabular-nums">
                   {totalCount} {totalCount === 1 ? 'pozycja' : totalCount < 5 ? 'pozycje' : 'pozycji'}
                 </p>
               </div>
@@ -81,7 +81,7 @@ export const CartDrawer: React.FC = () => {
 
             <button
               onClick={() => setIsCartOpen(false)}
-              className="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors"
+              className="p-1.5 sm:p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800 transition-colors cursor-pointer"
               aria-label="Zamknij koszyk"
             >
               <X className="w-5 h-5" />
@@ -89,7 +89,7 @@ export const CartDrawer: React.FC = () => {
           </div>
 
           {/* Drawer Content */}
-          <div className="flex-1 overflow-y-auto p-6 space-y-6">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-6">
             
             {/* Fulfillment Selector */}
             <div className="space-y-2">
