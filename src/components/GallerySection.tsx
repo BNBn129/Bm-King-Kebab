@@ -121,10 +121,15 @@ export const GallerySection: React.FC<GallerySectionProps> = ({ onGoToMenu }) =>
                 {spec.dishItem ? (
                   <button
                     onClick={() => setSelectedModalDish(spec.dishItem)}
-                    className="w-full inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-400 hover:text-black font-bold text-xs sm:text-sm border border-amber-500/30 hover:border-amber-500 transition-all duration-200 cursor-pointer active:scale-95"
+                    className="w-full inline-flex items-center justify-between py-2.5 px-4 rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-400 hover:text-black font-bold text-xs sm:text-sm border border-amber-500/30 hover:border-amber-500 transition-all duration-200 cursor-pointer active:scale-95"
                   >
-                    <Plus className="w-4 h-4" />
-                    <span>Dostosuj & Zamów ({spec.dishItem.price.toFixed(2)} zł)</span>
+                    <span className="inline-flex items-center gap-2">
+                      <Plus className="w-4 h-4 shrink-0" />
+                      <span>Dostosuj & Zamów</span>
+                    </span>
+                    <span className="font-mono tabular-nums whitespace-nowrap shrink-0">
+                      {spec.dishItem.price.toFixed(2)}&nbsp;zł
+                    </span>
                   </button>
                 ) : (
                   <div className="flex items-center justify-between text-xs text-amber-400 font-semibold py-1">

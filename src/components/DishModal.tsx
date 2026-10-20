@@ -95,8 +95,8 @@ export const DishModal: React.FC<DishModalProps> = ({ dish, onClose }) => {
         <div className="flex items-center justify-between p-3.5 sm:p-5 lg:p-6 border-b border-[#232733] bg-[#161922]">
           <div>
             <h3 className="text-base sm:text-lg md:text-xl font-bold text-white font-display">{dish.name}</h3>
-            <p className="text-[11px] sm:text-xs text-amber-400 font-medium mt-0.5 font-mono tabular-nums">
-              Cena bazowa: {dish.price.toFixed(2)} zł
+            <p className="text-[11px] sm:text-xs text-amber-400 font-medium mt-0.5 font-mono tabular-nums whitespace-nowrap">
+              Cena bazowa: {dish.price.toFixed(2)}&nbsp;zł
             </p>
           </div>
           <button
@@ -259,8 +259,8 @@ export const DishModal: React.FC<DishModalProps> = ({ dish, onClose }) => {
         <div className="p-3.5 sm:p-5 lg:p-6 border-t border-[#232733] bg-[#161922] flex items-center justify-between gap-3 sm:gap-4">
           <div className="shrink-0">
             <p className="text-[10px] sm:text-[11px] text-slate-400">Łączna kwota</p>
-            <p className="text-lg sm:text-xl font-bold text-amber-400 font-mono tabular-nums">
-              {totalPrice.toFixed(2)} zł
+            <p className="text-lg sm:text-xl font-bold text-amber-400 font-mono tabular-nums whitespace-nowrap">
+              {totalPrice.toFixed(2)}&nbsp;zł
             </p>
           </div>
 

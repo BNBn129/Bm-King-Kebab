@@ -132,8 +132,8 @@ export const OrderView: React.FC<OrderViewProps> = ({ setActiveTab }) => {
                         <h4 className="text-sm font-bold text-white truncate">
                           {ci.item.name}
                         </h4>
-                        <span className="text-sm font-bold text-amber-400 font-mono tabular-nums shrink-0">
-                          {(ci.finalPrice * ci.quantity).toFixed(2)} zł
+                        <span className="text-sm font-bold text-amber-400 font-mono tabular-nums shrink-0 whitespace-nowrap">
+                          {(ci.finalPrice * ci.quantity).toFixed(2)}&nbsp;zł
                         </span>
                       </div>
 
@@ -276,25 +276,25 @@ export const OrderView: React.FC<OrderViewProps> = ({ setActiveTab }) => {
 
               {/* Price Calculation Summary */}
               <div className="p-5 rounded-2xl bg-[#1a1d28] border border-[#2d3345] space-y-3">
-                <div className="flex justify-between text-xs text-slate-300">
+                <div className="flex justify-between items-center gap-2 text-xs text-slate-300">
                   <span>Wartość dań:</span>
-                  <span className="font-mono tabular-nums">{subtotal.toFixed(2)} zł</span>
+                  <span className="font-mono tabular-nums whitespace-nowrap shrink-0">{subtotal.toFixed(2)}&nbsp;zł</span>
                 </div>
-                <div className="flex justify-between text-xs text-slate-300">
+                <div className="flex justify-between items-center gap-2 text-xs text-slate-300">
                   <span>Opakowanie na wynos:</span>
-                  <span className="font-mono tabular-nums">{packagingFee.toFixed(2)} zł</span>
+                  <span className="font-mono tabular-nums whitespace-nowrap shrink-0">{packagingFee.toFixed(2)}&nbsp;zł</span>
                 </div>
                 {fulfillmentType === 'delivery' && (
-                  <div className="flex justify-between text-xs text-slate-300">
+                  <div className="flex justify-between items-center gap-2 text-xs text-slate-300">
                     <span>Dostawa w Łodzi:</span>
-                    <span className="font-mono tabular-nums">{deliveryFee.toFixed(2)} zł</span>
+                    <span className="font-mono tabular-nums whitespace-nowrap shrink-0">{deliveryFee.toFixed(2)}&nbsp;zł</span>
                   </div>
                 )}
 
-                <div className="pt-3 border-t border-[#2d3345] flex items-baseline justify-between">
+                <div className="pt-3 border-t border-[#2d3345] flex items-baseline justify-between gap-2">
                   <span className="text-sm font-bold text-white">RAZEM:</span>
-                  <span className="text-2xl font-bold text-amber-400 font-mono tabular-nums">
-                    {grandTotal.toFixed(2)} zł
+                  <span className="text-2xl font-bold text-amber-400 font-mono tabular-nums whitespace-nowrap shrink-0">
+                    {grandTotal.toFixed(2)}&nbsp;zł
                   </span>
                 </div>
 

@@ -11,7 +11,7 @@ export const Hero: React.FC<HeroProps> = ({ onGoToMenu }) => {
   const { setIsCartOpen } = useCart();
 
   return (
-    <section className="relative overflow-hidden pt-8 pb-12 sm:pt-14 sm:pb-16 lg:pt-20 lg:pb-24 border-b border-[#1f2330] bg-[#090a0e]">
+    <section id="glowna" className="relative overflow-hidden pt-8 pb-12 sm:pt-14 sm:pb-16 lg:pt-20 lg:pb-24 border-b border-[#1f2330] bg-[#090a0e]">
       {/* Editorial Luxury Ambient Glows */}
       <div 
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[340px] bg-gradient-to-b from-amber-500/12 via-amber-600/5 to-transparent rounded-full blur-3xl pointer-events-none -z-10" 
@@ -104,7 +104,7 @@ export const Hero: React.FC<HeroProps> = ({ onGoToMenu }) => {
         <div className="mt-8 sm:mt-12 lg:mt-16 pt-6 sm:pt-10 border-t border-[#1a1e2b] grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
           
           <div className="p-3.5 sm:p-4 rounded-xl bg-[#11131c] border border-[#202534] hover:border-amber-500/40 transition-all duration-300 hover:-translate-y-0.5">
-            <p className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-amber-400 font-mono tabular-nums">
+            <p className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-amber-400 font-mono tabular-nums whitespace-nowrap">
               4.9 <span className="text-xs sm:text-sm text-slate-400 font-normal">/ 5.0</span>
             </p>
             <p className="text-xs sm:text-sm font-semibold text-white mt-1">928+ Opinii Gości</p>
@@ -112,7 +112,7 @@ export const Hero: React.FC<HeroProps> = ({ onGoToMenu }) => {
           </div>
 
           <div className="p-3.5 sm:p-4 rounded-xl bg-[#11131c] border border-[#202534] hover:border-amber-500/40 transition-all duration-300 hover:-translate-y-0.5">
-            <p className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-amber-400">
+            <p className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-amber-400 whitespace-nowrap">
               2025 & 2026
             </p>
             <p className="text-xs sm:text-sm font-semibold text-white mt-1">Złoty Laureat</p>
@@ -120,7 +120,7 @@ export const Hero: React.FC<HeroProps> = ({ onGoToMenu }) => {
           </div>
 
           <div className="p-3.5 sm:p-4 rounded-xl bg-[#11131c] border border-[#202534] hover:border-amber-500/40 transition-all duration-300 hover:-translate-y-0.5">
-            <p className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white font-mono tabular-nums">
+            <p className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-white font-mono tabular-nums whitespace-nowrap">
               09:00 - 02:00
             </p>
             <p className="text-xs sm:text-sm font-semibold text-white mt-1">Otwarte 7 Dni</p>
@@ -128,7 +128,7 @@ export const Hero: React.FC<HeroProps> = ({ onGoToMenu }) => {
           </div>
 
           <div className="p-3.5 sm:p-4 rounded-xl bg-[#11131c] border border-[#202534] hover:border-amber-500/40 transition-all duration-300 hover:-translate-y-0.5">
-            <p className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-amber-400">
+            <p className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-amber-400 whitespace-nowrap">
               100% Gratis
             </p>
             <p className="text-xs sm:text-sm font-semibold text-white mt-1">Turecka Herbata</p>
