@@ -1,339 +1,177 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  ShoppingBag, 
-  Phone, 
-  Menu as MenuIcon, 
-  X, 
-  Home, 
-  Utensils, 
-  Sparkles, 
-  Award, 
-  MessageSquareQuote, 
-  MapPin, 
-  ExternalLink, 
-  ArrowRight,
-  Clock
-} from 'lucide-react';
+import { ShoppingBag, Phone, Menu as MenuIcon, X, Utensils, Home, Award, Camera, MessageSquareQuote, MapPin } from 'lucide-react';
 import { RESTAURANT_INFO } from '../data/restaurantData';
 import { useCart } from '../context/CartContext';
 
-export type TabType = 'home' | 'menu' | 'about' | 'gallery' | 'reviews' | 'contact' | 'glowna' | 'o-nas' | 'opinie' | 'kontakt' | 'specjaly';
+export type TabType = 'home' | 'menu' | 'about' | 'gallery' | 'reviews' | 'contact';
 
 interface NavbarProps {
-  onNavigateSection?: (sectionId: string) => void;
+  activeTab: TabType;
+  setActiveTab: (tab: TabType) => void;
 }
 
-export const Navbar: React.FC<NavbarProps> = ({ onNavigateSection }) => {
+export const Navbar: React.FC<NavbarProps> = ({ activeTab, setActiveTab }) => {
   const { totalCount, setIsCartOpen } = useCart();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const navTabs: { id: TabType; label: string; shortLabel: string; icon: React.ReactNode }[] = [
+    { id: 'home', label: 'Strona Główna', shortLabel: 'Główna', icon: <Home className="w-3.5 h-3.5 shrink-0" /> },
+    { id: 'menu', label: 'Królewskie Menu', shortLabel: 'Menu', icon: <Utensils className="w-3.5 h-3.5 shrink-0" /> },
+    { id: 'about', label: 'O Nas & Nagrody', shortLabel: 'O Nas', icon: <Award className="w-3.5 h-3.5 shrink-0" /> },
+    { id: 'gallery', label: 'Specjały & Galeria', shortLabel: 'Galeria', icon: <Camera className="w-3.5 h-3.5 shrink-0" /> },
+    { id: 'reviews', label: 'Opinie (4.9★)', shortLabel: 'Opinie', icon: <MessageSquareQuote className="w-3.5 h-3.5 shrink-0" /> },
+    { id: 'contact', label: 'Lokalizacja & Godziny', shortLabel: 'Lokalizacja', icon: <MapPin className="w-3.5 h-3.5 shrink-0" /> },
+  ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const handleTabClick = (tabId: TabType) => {
+    setActiveTab(tabId);
+    setMobileMenuOpen(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && menuOpen) {
-        setMenuOpen(false);
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [menuOpen]);
-
-  // Lock body scroll when mobile menu is open
-  useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [menuOpen]);
-
-  const handleNavClick = (sectionId: string) => {
-    setMenuOpen(false);
-    if (sectionId === 'cart') {
-      setIsCartOpen(true);
-      return;
-    }
-    if (onNavigateSection) {
-      onNavigateSection(sectionId);
-    } else {
-      if (sectionId === 'glowna' || sectionId === 'home') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        return;
-      }
-      const element = document.getElementById(sectionId);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  };
-
-  // Full complete list of all tab/section options of the website
-  const navTabs = [
-    { 
-      id: 'glowna', 
-      label: 'Strona Główna', 
-      icon: <Home className="w-5 h-5" />, 
-      desc: 'Początek strony i najważniejsze wyróżnienia' 
-    },
-    { 
-      id: 'menu', 
-      label: 'Karta Dań & Pełny Cennik', 
-      icon: <Utensils className="w-5 h-5" />, 
-      desc: 'Tortille, talerze, kapsalony, boxy, pity i burgery',
-      badge: '25+ dań'
-    },
-    { 
-      id: 'specjaly', 
-      label: 'Królewskie Receptury & Specjały', 
-      icon: <Sparkles className="w-5 h-5" />, 
-      desc: 'Autorskie specjały szefa kuchni i darmowy çay',
-      badge: 'Polecane'
-    },
-    { 
-      id: 'o-nas', 
-      label: 'O Nas & Jakość (Orły Gastronomii)', 
-      icon: <Award className="w-5 h-5" />, 
-      desc: 'Dwukrotny Złoty Laureat 2025 i 2026 w Łodzi' 
-    },
-    { 
-      id: 'opinie', 
-      label: 'Opinie Gości (Ocena 4.9★)', 
-      icon: <MessageSquareQuote className="w-5 h-5" />, 
-      desc: 'Ponad 928 prawdziwych opinii Google i Guru' 
-    },
-    { 
-      id: 'kontakt', 
-      label: 'Lokalizacja, Godziny & Dojazd', 
-      icon: <MapPin className="w-5 h-5" />, 
-      desc: 'ul. Sacharowa 45A, otwarte do 02:00, parking' 
-    },
-    { 
-      id: 'cart', 
-      label: 'Twoje Zamówienie (Koszyk)', 
-      icon: <ShoppingBag className="w-5 h-5" />, 
-      desc: 'Dostosuj zamówienie, odbiór osobisty lub dowóz',
-      badge: totalCount > 0 ? `${totalCount} ${totalCount === 1 ? 'danie' : 'dań'}` : undefined,
-      isSpecial: true
-    },
-  ];
+  }, [mobileMenuOpen]);
 
   return (
-    <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-        scrolled
-          ? 'bg-[#141210]/95 backdrop-blur-md text-white shadow-md border-b border-stone-800'
-          : 'bg-[#141210] text-white border-b border-stone-800/80'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 sm:h-20 gap-2">
+    <header className="sticky top-0 z-40 bg-[#0b0c10]/95 backdrop-blur-md border-b border-[#232733] transition-colors w-full">
+      <div className="w-full px-3 sm:px-5 lg:px-6 xl:px-10">
+        <div className="flex items-center justify-between gap-2 sm:gap-4 h-16 sm:h-20">
           
-          {/* Brand Logo & Name (Anchored Far-Left, shrink-0, always 100% visible) */}
-          <a
-            href="#glowna"
-            onClick={(e) => {
-              e.preventDefault();
-              handleNavClick('glowna');
-            }}
-            className="flex items-center gap-2 sm:gap-3 text-left group cursor-pointer shrink-0"
-            title="BM King Kebab"
+          {/* Brand Wordmark (anchored to the far left) */}
+          <button
+            onClick={() => handleTabClick('home')}
+            className="text-lg sm:text-xl xl:text-2xl font-bold tracking-wider text-white whitespace-nowrap shrink-0 hover:text-amber-400 transition-colors flex items-center gap-1.5 sm:gap-2 cursor-pointer text-left"
+            title="BM KING KEBAB - Strona Główna"
           >
-            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-stone-950 font-black text-xs sm:text-sm tracking-tight shadow-md group-hover:scale-105 transition-transform shrink-0">
-              BM
-            </div>
-            <div className="flex flex-col">
-              <div className="text-sm sm:text-lg font-black tracking-wider text-white whitespace-nowrap uppercase">
-                BM KING <span className="text-amber-500">KEBAB</span>
-              </div>
-              <p className="text-[9px] sm:text-[11px] text-stone-400 font-medium tracking-wider uppercase whitespace-nowrap hidden min-[360px]:block">
-                Łódź · Sacharowa 45A
-              </p>
-            </div>
-          </a>
+            <span className="text-amber-500 font-display">BM KING</span>
+            <span className="font-light tracking-widest text-slate-300">KEBAB</span>
+          </button>
 
-          {/* Clean Right Actions Zone */}
-          <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
-            
-            {/* Live Open Status Indicator (desktop only) */}
-            <div className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-stone-900 border border-stone-800 text-stone-300 text-xs font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Otwarte do 01:00</span>
-            </div>
+          {/* Navigation Tabs for Laptop & Tablet Landscape (1024px+) */}
+          {/* Uses shortLabel on lg (1024-1279px) and full label on xl (1280px+) so Lokalizacja & Zamówienie are never pushed off */}
+          <nav className="hidden lg:flex items-center gap-1 xl:gap-2 text-xs xl:text-sm font-medium">
+            {navTabs.map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => handleTabClick(tab.id)}
+                  className={`px-2 xl:px-3 py-1.5 xl:py-2 rounded-lg transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer ${
+                    isActive
+                      ? 'bg-amber-500/15 text-amber-400 font-bold border border-amber-500/40 shadow-sm shadow-amber-500/10'
+                      : 'text-slate-300 hover:text-white hover:bg-slate-800/50 border border-transparent'
+                  }`}
+                >
+                  <span className={isActive ? 'text-amber-400' : 'text-slate-400'}>
+                    {tab.icon}
+                  </span>
+                  <span className="hidden xl:inline">{tab.label}</span>
+                  <span className="xl:hidden inline">{tab.shortLabel}</span>
+                </button>
+              );
+            })}
+          </nav>
 
-            {/* Direct Phone Call Button (Compact icon on phone, full text on tablet/desktop) */}
+          {/* Right Action Zone (anchored, shrink-0 so Zamówienie is always 100% visible) */}
+          <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
+            {/* Phone button: compact icon on tablet landscape, full text on 2xl */}
             <a
               href={`tel:${RESTAURANT_INFO.phoneRaw}`}
-              className="p-2 sm:px-3.5 sm:py-2 rounded-xl bg-stone-900/90 hover:bg-stone-800 border border-stone-700/80 text-stone-200 text-xs font-semibold transition-all hover:text-amber-400 shadow-xs flex items-center gap-1.5 shrink-0"
+              className="hidden sm:flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-amber-400 p-2 xl:py-2 xl:px-3 border border-slate-800 rounded-lg transition-colors whitespace-nowrap shrink-0"
               title={`Zadzwoń: ${RESTAURANT_INFO.phone}`}
             >
-              <Phone className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-              <span className="hidden sm:inline font-mono">{RESTAURANT_INFO.phone}</span>
+              <Phone className="w-3.5 h-3.5 text-amber-500" />
+              <span className="hidden 2xl:inline">{RESTAURANT_INFO.phone}</span>
+              <span className="hidden xl:inline 2xl:hidden">Zadzwoń</span>
             </a>
 
-            {/* Cart / Order Trigger */}
+            {/* Cart Button (Always completely visible, shrink-0) */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative flex items-center gap-1.5 px-2.5 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-stone-950 text-xs sm:text-sm font-extrabold tracking-wide transition-all shadow-md shadow-amber-500/20 active:scale-95 cursor-pointer shrink-0"
+              className="relative flex items-center gap-1.5 sm:gap-2 px-3 sm:px-3.5 xl:px-4 py-2 sm:py-2.5 bg-amber-500 hover:bg-amber-400 text-black font-semibold text-xs tracking-wide rounded-lg transition-all shadow-lg shadow-amber-500/10 active:scale-95 whitespace-nowrap shrink-0 cursor-pointer"
               aria-label="Koszyk zamówienia"
             >
               <ShoppingBag className="w-4 h-4 shrink-0" />
-              <span className="hidden sm:inline">Zamówienie</span>
+              <span className="inline">Zamówienie</span>
               {totalCount > 0 && (
-                <span className="inline-flex items-center justify-center bg-stone-950 text-amber-300 text-[10px] sm:text-xs font-black rounded-full px-1.5 py-0.5 tabular-nums shrink-0">
+                <span className="inline-flex items-center justify-center bg-black text-amber-400 text-[10px] sm:text-[11px] font-bold rounded-full w-5 h-5 tabular-nums shrink-0">
                   {totalCount}
                 </span>
               )}
             </button>
 
-            {/* Master 3-bar Hamburger Menu Button */}
+            {/* Mobile/Tablet menu toggle */}
             <button
-              onClick={() => setMenuOpen(true)}
-              className="p-2 sm:p-2.5 rounded-xl bg-stone-900/90 hover:bg-stone-800 border border-stone-700/80 text-stone-200 hover:text-white transition-all cursor-pointer flex items-center justify-center shrink-0"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="lg:hidden p-2 text-slate-300 hover:text-white rounded-lg focus:outline-none cursor-pointer shrink-0"
               aria-label="Otwórz menu nawigacji"
-              title="Menu"
             >
-              <MenuIcon className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" />
+              {mobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6 text-amber-400" /> : <MenuIcon className="w-5 h-5 sm:w-6 sm:h-6" />}
             </button>
           </div>
-
         </div>
       </div>
 
-      {/* Luxury Full Navigation Drawer displaying ALL tab options */}
-      {menuOpen && (
-        <div className="fixed inset-0 z-50 flex justify-end animate-fade-in">
-          {/* Backdrop */}
+      {/* Mobile & Tablet Full Drawer Navigation */}
+      {mobileMenuOpen && (
+        <>
+          {/* Backdrop Overlay */}
           <div
-            className="fixed inset-0 bg-black/75 backdrop-blur-sm transition-opacity"
-            onClick={() => setMenuOpen(false)}
-            aria-label="Zamknij menu"
+            className="fixed inset-0 top-16 sm:top-20 bg-black/60 backdrop-blur-xs z-30 lg:hidden"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-hidden="true"
           />
 
-          {/* Drawer Panel */}
-          <div className="relative w-full max-w-md bg-[#141210] border-l border-stone-800 text-white h-full overflow-y-auto p-5 sm:p-7 flex flex-col shadow-2xl animate-slide-in-right">
-            
-            {/* Top Bar with Brand and Close Button */}
-            <div className="flex items-center justify-between pb-5 border-b border-stone-800 shrink-0">
-              <div className="flex items-center gap-3">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-stone-950 font-black text-sm shadow-md">
-                  BM
-                </div>
-                <div>
-                  <h3 className="text-base font-bold tracking-tight uppercase font-serif text-white">
-                    BM KING <span className="text-amber-500">KEBAB</span>
-                  </h3>
-                  <p className="text-xs text-amber-400 font-medium">Wszystkie zakładki i menu</p>
-                </div>
-              </div>
-
-              <button
-                onClick={() => setMenuOpen(false)}
-                className="p-2 rounded-xl bg-stone-900 border border-stone-800 text-stone-400 hover:text-white hover:bg-stone-800 transition-colors cursor-pointer"
-                aria-label="Zamknij menu"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Navigation Tabs List - Shows EVERY option */}
-            <div className="py-4 space-y-2">
-              <p className="text-[11px] font-bold text-amber-400 uppercase tracking-widest px-1">
-                Wybierz sekcję
-              </p>
-              
-              <nav className="space-y-1.5">
-                {navTabs.map((item) => (
+          <div className="relative z-40 lg:hidden border-b border-[#202534] bg-[#0c0d14] px-4 sm:px-6 py-5 space-y-3 animate-fade-in-up shadow-2xl">
+            <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider px-2">
+              Przejdź do zakładki
+            </p>
+            <nav className="flex flex-col space-y-1 text-sm font-medium">
+              {navTabs.map((tab) => {
+                const isActive = activeTab === tab.id;
+                return (
                   <button
-                    key={item.id}
-                    onClick={() => handleNavClick(item.id)}
-                    className={`w-full group p-3.5 sm:p-4 rounded-xl border transition-all text-left flex items-center justify-between cursor-pointer ${
-                      item.isSpecial
-                        ? 'bg-amber-500/15 hover:bg-amber-500/25 border-amber-500/40 text-amber-200'
-                        : 'bg-stone-900/60 hover:bg-stone-800/90 border-stone-800/90 hover:border-amber-500/40 text-white'
+                    key={tab.id}
+                    onClick={() => handleTabClick(tab.id)}
+                    className={`flex items-center justify-between px-3.5 py-3 rounded-xl transition-colors text-left cursor-pointer ${
+                      isActive
+                        ? 'bg-amber-500/20 text-amber-300 font-bold border border-amber-500/40'
+                        : 'text-slate-200 hover:bg-slate-800/60 hover:text-white'
                     }`}
                   >
-                    <div className="flex items-center gap-3 min-w-0">
-                      <div className={`w-9 h-9 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center shrink-0 transition-colors ${
-                        item.isSpecial 
-                          ? 'bg-amber-500 text-stone-950' 
-                          : 'bg-stone-800 group-hover:bg-amber-500/20 text-amber-400'
-                      }`}>
-                        {item.icon}
-                      </div>
-                      <div className="min-w-0">
-                        <div className="flex items-center gap-2">
-                          <span className={`text-sm sm:text-base font-bold truncate ${
-                            item.isSpecial ? 'text-amber-300' : 'text-white group-hover:text-amber-400'
-                          }`}>
-                            {item.label}
-                          </span>
-                          {item.badge && (
-                            <span className="text-[10px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-400 border border-amber-500/30 shrink-0">
-                              {item.badge}
-                            </span>
-                          )}
-                        </div>
-                        <p className="text-xs text-stone-400 truncate mt-0.5">
-                          {item.desc}
-                        </p>
-                      </div>
+                    <div className="flex items-center gap-3">
+                      <span className={isActive ? 'text-amber-400' : 'text-slate-400'}>
+                        {tab.icon}
+                      </span>
+                      <span>{tab.label}</span>
                     </div>
-                    <ArrowRight className="w-4 h-4 text-stone-600 group-hover:text-amber-400 group-hover:translate-x-1 transition-all shrink-0 ml-2" />
+                    {isActive && (
+                      <span className="text-[10px] uppercase font-bold text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded">
+                        Aktywna
+                      </span>
+                    )}
                   </button>
-                ))}
-              </nav>
-            </div>
+                );
+              })}
+            </nav>
 
-            {/* Accolade Banner */}
-            <div className="my-2 p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 shrink-0">
-              <div className="flex items-center gap-2 text-xs font-bold text-amber-400 uppercase tracking-wider mb-1">
-                <Award className="w-4 h-4 shrink-0" />
-                <span>Złoty Laureat Orły Gastronomii</span>
-              </div>
-              <p className="text-xs text-stone-300 leading-relaxed">
-                Podwójny laureat 2025 i 2026. Tradycyjne receptury, świeżo wypiekany chleb i bezpłatna turecka herbata dla każdego gościa.
-              </p>
-            </div>
-
-            {/* Bottom Contact & Quick Order Actions */}
-            <div className="pt-4 border-t border-stone-800 space-y-2.5 mt-auto shrink-0">
+            <div className="pt-3 border-t border-slate-800 flex flex-col gap-2">
               <a
                 href={`tel:${RESTAURANT_INFO.phoneRaw}`}
-                className="w-full py-3 px-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-stone-950 font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 transition-all shadow-md active:scale-98"
+                className="flex items-center justify-center gap-2 py-3 bg-slate-900 border border-slate-700 rounded-lg text-xs text-slate-200 font-semibold hover:border-amber-500/40 transition-colors"
               >
-                <Phone className="w-4 h-4 shrink-0" />
-                <span>Zadzwoń i zamów: {RESTAURANT_INFO.phone}</span>
+                <Phone className="w-4 h-4 text-amber-500" />
+                <span>Zadzwoń do restauracji: {RESTAURANT_INFO.phone}</span>
               </a>
-
-              <a
-                href={RESTAURANT_INFO.pyszneUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-2.5 px-4 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-700 text-stone-200 hover:text-white font-semibold text-xs flex items-center justify-center gap-2 transition-all"
-              >
-                <span>Zamów online na Pyszne.pl</span>
-                <ExternalLink className="w-3.5 h-3.5 text-stone-400 shrink-0" />
-              </a>
-
-              <div className="flex items-center justify-center gap-1.5 text-center text-[10px] text-stone-400 pt-1">
-                <Clock className="w-3 h-3 text-amber-400 shrink-0" />
-                <span>Otwarte: Pon-Czw, Ndz do 01:00 · Pt-Sob do 02:00</span>
-              </div>
             </div>
-
           </div>
-        </div>
+        </>
       )}
     </header>
   );

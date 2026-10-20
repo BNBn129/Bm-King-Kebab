@@ -155,29 +155,29 @@ export const MenuSection: React.FC = () => {
                   {/* Subtle Unboxed Header Tag if Signature/Bestseller */}
                   <div className="flex items-center justify-between gap-2 mb-1.5 sm:mb-2">
                     {item.isSignature ? (
-                      <span className="text-[10px] sm:text-[11px] font-semibold text-amber-400 flex items-center gap-1 shrink-0">
-                        <Flame className="w-3 h-3 text-amber-500 shrink-0" />
+                      <span className="text-[10px] sm:text-[11px] font-semibold text-amber-400 flex items-center gap-1">
+                        <Flame className="w-3 h-3 text-amber-500" />
                         Autorski Specjał
                       </span>
                     ) : item.isBestseller ? (
-                      <span className="text-[10px] sm:text-[11px] font-semibold text-amber-300 flex items-center gap-1 shrink-0">
-                        <Sparkles className="w-3 h-3 text-amber-400 shrink-0" />
-                        Bestseller
+                      <span className="text-[10px] sm:text-[11px] font-semibold text-amber-300 flex items-center gap-1">
+                        <Sparkles className="w-3 h-3 text-amber-400" />
+                        Bestseller Łodzi
                       </span>
                     ) : item.isVegetarian ? (
-                      <span className="text-[10px] sm:text-[11px] font-semibold text-emerald-400 flex items-center gap-1 shrink-0">
-                        <Leaf className="w-3 h-3 text-emerald-400 shrink-0" />
+                      <span className="text-[10px] sm:text-[11px] font-semibold text-emerald-400 flex items-center gap-1">
+                        <Leaf className="w-3 h-3 text-emerald-400" />
                         Wegetariańskie
                       </span>
                     ) : (
-                      <span className="text-[10px] sm:text-[11px] text-slate-500 uppercase tracking-wider shrink-0">
+                      <span className="text-[10px] sm:text-[11px] text-slate-500 uppercase tracking-wider">
                         BM King Kebab
                       </span>
                     )}
 
-                    {/* Price with tabular nums - guaranteed non-breaking */}
-                    <span className="text-xs sm:text-sm md:text-sm lg:text-lg font-bold text-amber-400 font-mono tabular-nums whitespace-nowrap shrink-0">
-                      {item.price.toFixed(2)}&nbsp;zł
+                    {/* Price with tabular nums */}
+                    <span className="text-xs sm:text-sm md:text-sm lg:text-lg font-bold text-amber-400 font-mono tabular-nums">
+                      {item.price.toFixed(2)} zł
                     </span>
                   </div>
 

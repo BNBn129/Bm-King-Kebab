@@ -11,25 +11,25 @@ export const HomeExploreCards: React.FC<HomeExploreCardsProps> = ({ onSelectTab 
     <section className="py-12 sm:py-16 lg:py-24 bg-[#090a0e] border-b border-[#1f2330]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Dine-In & Delivery Direct Action Banner */}
+        {/* Accolade Banner */}
         <div className="mb-8 sm:mb-12 lg:mb-16 p-5 sm:p-7 lg:p-8 rounded-2xl bg-[#11131c] border border-[#202534] flex flex-col md:flex-row items-start md:items-center justify-between gap-5 lg:gap-6 shadow-xl">
           <div className="flex items-start gap-4">
             <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-amber-500/10 border border-amber-500/25 flex items-center justify-center shrink-0 text-amber-400 mt-0.5">
-              <MapPin className="w-5 h-5 sm:w-6 sm:h-6" />
+              <Award className="w-5 h-5 sm:w-6 sm:h-6" />
             </div>
             <div>
               <div className="flex flex-wrap items-center gap-2">
                 <span className="text-[11px] sm:text-xs uppercase font-bold tracking-wider text-amber-400">
-                  Łódź Widzew · ul. Sacharowa 45A
+                  Złoty Laureat 2025 & 2026
                 </span>
                 <span className="text-xs text-slate-500 hidden xs:inline">·</span>
-                <span className="text-[11px] sm:text-xs text-slate-300">Na miejscu, na wynos i z dowozem</span>
+                <span className="text-[11px] sm:text-xs text-slate-300">Orły Gastronomii Łódź</span>
               </div>
               <h3 className="text-base sm:text-xl lg:text-2xl font-bold text-white mt-1">
-                Odwiedź nas stacjonarnie lub zamów telefonicznie
+                Królewska jakość doceniona przez setki gości
               </h3>
               <p className="mt-1.5 text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-                Wygodny parking tuż pod wejściem, gorąca bezpłatna turecka herbata na powitanie i ekspresowa realizacja zamówień.
+                Każde danie przygotowujemy z pasją ze świeżych składników. Odwiedź nas na ul. Sacharowa 45A, gdzie na powitanie czeka bezpłatna turecka herbata.
               </p>
             </div>
           </div>

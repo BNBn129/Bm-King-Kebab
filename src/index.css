@@ -2,27 +2,23 @@
 
 @theme {
   --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-serif: "Cinzel", "Playfair Display", Georgia, serif;
-  --font-editorial: "Playfair Display", Georgia, serif;
-  --color-canvas: #FAF7F2;
-  --color-canvas-card: #FFFFFF;
-  --color-canvas-border: #E8E3DA;
-  --color-brand-charcoal: #141210;
-  --color-brand-dark: #1C1917;
-  --color-brand-gold: #D97706;
-  --color-brand-red: #DC2626;
-}
-
-html {
-  scroll-behavior: smooth;
+  --color-canvas: #0b0c10;
+  --color-canvas-card: #14161f;
+  --color-canvas-border: #232737;
+  --color-amber-base: #f59e0b;
 }
 
 body {
   font-family: var(--font-sans);
-  background-color: #FAF7F2;
-  color: #1C1917;
+  background-color: #0b0c10;
+  color: #f1f5f9;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
 }
 
 /* Fluid Keyframe Animations */
@@ -48,11 +44,9 @@ body {
 
 @keyframes slideInRight {
   from {
-    opacity: 0;
     transform: translateX(100%);
   }
   to {
-    opacity: 1;
     transform: translateX(0);
   }
 }
@@ -69,11 +63,11 @@ body {
 }
 
 .animate-fade-in {
-  animation: fadeIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 320ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeInUp 280ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-slide-in-right {
@@ -81,7 +75,7 @@ body {
 }
 
 .animate-scale-up {
-  animation: scaleUp 260ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: scaleUp 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Custom scrollbar */
@@ -90,12 +84,12 @@ body {
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FAF7F2;
+  background: #0b0c10;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D5CEC2;
-  border-radius: 9999px;
+  background: #232737;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #B8B0A2;
+  background: #f59e0b;
 }

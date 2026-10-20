@@ -169,8 +169,8 @@ export const CartDrawer: React.FC = () => {
                           )}
                         </div>
 
-                        <span className="text-sm font-bold text-white font-mono tabular-nums shrink-0 whitespace-nowrap">
-                          {(cartItem.finalPrice * cartItem.quantity).toFixed(2)}&nbsp;zł
+                        <span className="text-sm font-bold text-white font-mono tabular-nums shrink-0">
+                          {(cartItem.finalPrice * cartItem.quantity).toFixed(2)} zł
                         </span>
                       </div>
 
@@ -271,24 +271,24 @@ export const CartDrawer: React.FC = () => {
               
               {/* Cost Summary Breakdown */}
               <div className="space-y-1.5 text-xs text-slate-400">
-                <div className="flex justify-between items-center gap-2">
+                <div className="flex justify-between">
                   <span>Wartość dań:</span>
-                  <span className="font-mono tabular-nums text-slate-200 whitespace-nowrap shrink-0">{subtotal.toFixed(2)}&nbsp;zł</span>
+                  <span className="font-mono tabular-nums text-slate-200">{subtotal.toFixed(2)} zł</span>
                 </div>
-                <div className="flex justify-between items-center gap-2">
+                <div className="flex justify-between">
                   <span>Opakowania na wynos (1 zł/danie):</span>
-                  <span className="font-mono tabular-nums text-slate-200 whitespace-nowrap shrink-0">{packagingFee.toFixed(2)}&nbsp;zł</span>
+                  <span className="font-mono tabular-nums text-slate-200">{packagingFee.toFixed(2)} zł</span>
                 </div>
                 {orderType === 'delivery' && (
-                  <div className="flex justify-between items-center gap-2">
+                  <div className="flex justify-between">
                     <span>Koszt dostawy (Łódź):</span>
-                    <span className="font-mono tabular-nums text-slate-200 whitespace-nowrap shrink-0">{deliveryFee.toFixed(2)}&nbsp;zł</span>
+                    <span className="font-mono tabular-nums text-slate-200">{deliveryFee.toFixed(2)} zł</span>
                   </div>
                 )}
-                <div className="pt-2 border-t border-[#232733] flex justify-between items-center gap-2 text-sm font-bold text-white">
+                <div className="pt-2 border-t border-[#232733] flex justify-between text-sm font-bold text-white">
                   <span>Łącznie do zapłaty:</span>
-                  <span className="text-amber-400 font-mono tabular-nums text-lg whitespace-nowrap shrink-0">
-                    {grandTotal.toFixed(2)}&nbsp;zł
+                  <span className="text-amber-400 font-mono tabular-nums text-lg">
+                    {grandTotal.toFixed(2)} zł
                   </span>
                 </div>
               </div>
